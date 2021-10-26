@@ -2,3 +2,7 @@
   text-align: center;
 
 }
+
+.active {
+  border: 3px #FF4141 solid;
+}

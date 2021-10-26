@@ -10,8 +10,8 @@ import minim from './../noun_Half Note_88569.png'
 // Styled Components
 
 const NoteValue =  styled.img`
-height: 50px;
-  width: 50px;
+height: 30px;
+  width: 30px;
   .active {
     border: 3px #FF4141 solid;
   }
@@ -20,14 +20,25 @@ height: 50px;
 const Container = styled.div`
     background: white;
     width: 250px;
-    height: 400px;
-  input {
-    width: 60px;
-  }
+    height: 230px;
+    border-bottom: #224422 3px dashed;
+    border-right: #224422 3px dashed;
+    text-align: left;
+    padding: 10px;
 
-  button {
-    margin: 10px auto;
-  }
+      input {
+        width: 60px;
+      }
+    
+      button {
+        margin: 10px auto;
+      }
+`
+
+const Control = styled.div`
+  display: flex;
+  place-content: space-between;
+  align-items: center;
 `
 
 // Component
@@ -36,8 +47,9 @@ const StepEditor = (props) => {
 
     // State variables
     const [stepToEdit, setStepToEdit] = useState();
-    const [length, setLength] = useState()
-    const [base, setBase] = useState()
+    const [length, setLength] = useState(2)
+    const [base, setBase] = useState(4)
+
 
     // When the parent updates the props, update our states
     useEffect(() => {
@@ -87,25 +99,33 @@ const StepEditor = (props) => {
         props.removeStep(stepToEdit.id)
     }
 
+    // TODO Add the possibility to choose a sound for a step
+    // Add the possibility to select a metronome sound group, say 3 types of sound low mid high
+
     // JSX
 
     return(
         <Container>
-            <h2>Edit</h2>
+            <h3>Edit Step</h3>
 
-            <p>Length</p>
-            <input type='number' value={length} onChange={(e) => setLength(e.target.value)}/>
-
-            <p>Base</p>
-            <NoteValue className={ base === 2 ? 'active' : ''} src={minim} onClick={() => setBase(2)}/>
-            <NoteValue className={ base === 4 ? 'active' : ''} src={crochet} onClick={() => setBase(4)}/>
-            <NoteValue className={ base === 8 ? 'active' : ''} src={quaver} onClick={() => setBase(8)}/>
-            <NoteValue className={ base === 16 ? 'active' : ''} src={semiquaver} onClick={() => setBase(16)}/>
-
-            <div>
-                <button onClick={addHandler}>New</button>
-                <button onClick={removeHandler}>Delete</button>
-            </div>
+            <Control>
+                <p>Repeats:</p>
+                <input type='number' value={length} onChange={(e) => setLength(e.target.value)}/>
+            </Control>
+            <Control>
+            <p>Division:</p>
+                <NoteValue className={ base === 8 ? 'active' : ''} src={minim} onClick={() => setBase(8)}/>
+                <NoteValue className={ base === 4 ? 'active' : ''} src={crochet} onClick={() => setBase(4)}/>
+                <NoteValue className={ base === 2 ? 'active' : ''} src={quaver} onClick={() => setBase(2)}/>
+                <NoteValue className={ base === 1 ? 'active' : ''} src={semiquaver} onClick={() => setBase(1)}/>
+            </Control>
+            <Control>
+                <p>Actions:</p>
+                <div>
+                    <button onClick={addHandler}>New</button>
+                    <button onClick={removeHandler}>Delete</button>
+                </div>
+            </Control>
         </Container>
     )
 }

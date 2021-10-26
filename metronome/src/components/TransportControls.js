@@ -8,12 +8,28 @@ const Container = styled.div`
   background: white;
   margin: 0;
   display: flex;
+  place-content: space-between;
+  align-items: center;
+  
+  border-bottom: #224422 3px dashed;
   
   h1 {
-    margin: 0;
+    margin-left: 5px;
     padding: 0;
     font-size: 20px;
   }
+`
+
+const Site = styled.div`
+  margin: 0 0 0 10px;
+  display: flex;
+  align-items: center;
+`
+
+const Controls = styled.div`
+  display: flex;
+  align-items: center;
+  
 `
 
 const Button = styled.button`
@@ -30,19 +46,7 @@ const TransportControls = (props) => {
     const [tempo, setTempo] = useState(120)
     const [volume, setVolume] = useState(120)
 
-    /**
-     * Handles the play button
-     */
-    const playButtonHandler =() => {
-        Tone.start();
-        Tone.Transport.start();
-    }
 
-    /**
-     * Handles the stop button
-     * @returns {Transport}
-     */
-    const stopButtonHandler =() => Tone.Transport.stop();
 
     /**
      * Handles when the user changes the tempo slider
@@ -66,12 +70,19 @@ const TransportControls = (props) => {
 
     return (
         <Container>
-            <h1>Metronome</h1>
-            <Button onClick={playButtonHandler}>Play</Button>
-            <Button>Pause</Button>
-            <Button onClick={stopButtonHandler}>Stop</Button>
-            Tempo:<input type="range" min="20" max="300" value={tempo} onChange={tempoHandler} />
-            Volume:<input type="range" min="-60" max="0" value={volume} onChange={volumeHandler} />
+            <Site>
+                <span className="material-icons">timer</span>
+                <h1>Programmable Metronome</h1>
+
+            </Site>
+
+
+            <Controls>
+                <Button onClick={props.playButtonHandler}><span className="material-icons" style={{color: "green"}}>play_arrow</span></Button>
+                <Button onClick={props.stopButtonHandler}><span className="material-icons">stop</span></Button>
+                Tempo:<input type="range" min="20" max="300" value={tempo} onChange={tempoHandler} />
+                Volume:<input type="range" min="-60" max="0" value={volume} onChange={volumeHandler} />
+            </Controls>
         </Container>
     )
 }

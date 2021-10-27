@@ -13,8 +13,8 @@ import sampleList from "../sampleList";
 // Styled Components
 
 const Container = styled.div`
-    border-bottom: #224422 2px dashed;
-    border-right: #224422 2px dashed;
+    border-bottom: #886F68 1px solid;
+    border-right: #886F68 1px solid;
     padding: 10px;
     margin: 0;
     text-align: left;
@@ -25,6 +25,10 @@ const Controls = styled.div`
     display: flex;
     align-items: center;
     place-content: space-between;
+    select {
+      border-radius: 5px;
+      padding: 2px;
+    }
 `
 
 const Heading = styled.div`

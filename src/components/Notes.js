@@ -12,8 +12,8 @@ import { useState } from 'react'
 
 const Container = styled.div`
     width: 250px;
-    border-bottom: #224422 2px dashed;
-    border-right: #224422 2px dashed;
+    border-bottom: #886F68 1px solid;
+    border-right: #886F68 1px solid;
     background: white;  
     padding: 10px;
     margin: 0;

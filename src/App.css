@@ -1,8 +1,11 @@
 .App {
   text-align: center;
-  background: gainsboro;
+  /*background: gainsboro;*/
+  background: #e8e2de;
 }
 
 .active {
-  border: 3px #224422 solid;
+
+  background: #efefef;
+
 }

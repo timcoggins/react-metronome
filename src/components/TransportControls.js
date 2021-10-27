@@ -17,7 +17,7 @@ const Container = styled.div`
     display: flex;
     place-content: space-between;
     align-items: center;
-    border-bottom: #224422 2px dashed;
+    border-bottom: #886F68 1px solid;
   
     // Styles for the application title
     h1 {
@@ -42,6 +42,15 @@ const Button = styled.button`
   margin: 5px;
   height: 30px;
   width: 50px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+`
+
+const SliderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
 `
 
 /**
@@ -54,7 +63,7 @@ const TransportControls = (props) => {
 
     // State Variables
     const [tempo, setTempo] = useState(120)
-    const [volume, setVolume] = useState(120)
+    const [volume, setVolume] = useState(-6)
 
     /**
      * Handles when the user changes the tempo slider
@@ -69,7 +78,10 @@ const TransportControls = (props) => {
      * Handles when the user changes the volume slider
      * @param event
      */
-    const volumeHandler = (event) => setVolume(event.target.value)
+    const volumeHandler = (event) => {
+        setVolume(event.target.value)
+        props.updateVolume(event.target.value)
+    }
 
     // JSX
 
@@ -86,8 +98,16 @@ const TransportControls = (props) => {
             <Controls>
                 <Button onClick={props.playButtonHandler}><span className="material-icons" style={{color: "green"}}>play_arrow</span></Button>
                 <Button onClick={props.stopButtonHandler}><span className="material-icons">stop</span></Button>
-                BPM: {tempo} <input type="range" min="20" max="300" value={tempo} onChange={tempoHandler} />
-                Volume:<input type="range" min="-60" max="0" value={volume} onChange={volumeHandler} />
+            </Controls>
+            <Controls>
+                <SliderContainer>
+                    {tempo} bpm
+                    <input type="range" min="10" max="350" value={tempo} onChange={tempoHandler} />
+                </SliderContainer>
+                <SliderContainer>
+                    {volume}db
+                    <input type="range" min="-60" max="0" value={volume} onChange={volumeHandler} />
+                </SliderContainer>
             </Controls>
         </Container>
     )

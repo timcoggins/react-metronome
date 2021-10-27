@@ -21,8 +21,8 @@ import minim from './../noun_Half Note_88569.png'
 const Container = styled.div`
     background: white;
     width: 250px;
-    border-bottom: #224422 2px dashed;
-    border-right: #224422 2px dashed;
+    border-bottom: #886F68 1px solid;
+    border-right: #886F68 1px solid;
     text-align: left;
     padding: 10px;
     margin: 0;
@@ -48,8 +48,11 @@ const NoteValue =  styled.img`
     height: 30px;
     width: 30px;
     cursor: pointer;
+    padding: 5px;
+    //border-radius: 5px;
     .active {
-      border: 3px #FF4141 solid;
+      //border: 1px #0075ff solid;
+      //background: black;
     }
 `
 

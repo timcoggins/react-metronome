@@ -27,26 +27,14 @@ const initialData = [
     },
     {
         id: nanoid(),
-        length: 4,
-        base: 1,
+        length: 2,
+        base: 2,
         silent: false
     },
     {
         id: nanoid(),
         length: 3,
         base: 2,
-        silent: false
-    },
-    {
-        id: nanoid(),
-        length: 5,
-        base: 1,
-        silent: false
-    },
-    {
-        id: nanoid(),
-        length: 1,
-        base: 8,
         silent: false
     }
 ];
@@ -62,10 +50,11 @@ const Container = styled.div`
 
 const Metronome = () => {
 
+    const vol = new Tone.Volume().toDestination();
     // Setup ToneJS Oscillators
-    const osc = new Tone.Player("./cr78/Bongo_Hi1_Orig_CR78.wav").toDestination();
-    const osc2 = new Tone.Player("./cr78/Rim_Orig_CR78.wav").toDestination();
-    const osc3 = new Tone.Player("./cr78/Cowb_Orig_CR78.wav").toDestination();
+    const osc = new Tone.Player("./cr78/Bongo_Hi1_Orig_CR78.wav").connect(vol);
+    const osc2 = new Tone.Player("./cr78/Rim_Orig_CR78.wav").connect(vol);
+    const osc3 = new Tone.Player("./cr78/Cowb_Orig_CR78.wav").connect(vol);
 
     let useReset = true;
 
@@ -192,10 +181,21 @@ const Metronome = () => {
         setStepSelected(stepData[0])
     }
 
+    /**
+     * Updates the volume
+     * @param volume
+     */
+    const updateVolume = (volume) => {vol.volume.value = volume}
+
     // JSX
 
     return(<>
-        <TransportControls tone={Tone} playButtonHandler={playButtonHandler} stopButtonHandler={stopButtonHandler}/>
+        <TransportControls
+            tone={Tone}
+            playButtonHandler={playButtonHandler}
+            stopButtonHandler={stopButtonHandler}
+            updateVolume={updateVolume}
+        />
         <Container>
             <div>
                 {stepSelected && <StepEditor step={stepSelected} updateStep={updateStep} addStep={addStep} removeStep={removeStep}/>}

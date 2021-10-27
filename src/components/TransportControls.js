@@ -80,7 +80,7 @@ const TransportControls = (props) => {
             <Controls>
                 <Button onClick={props.playButtonHandler}><span className="material-icons" style={{color: "green"}}>play_arrow</span></Button>
                 <Button onClick={props.stopButtonHandler}><span className="material-icons">stop</span></Button>
-                Tempo:<input type="range" min="20" max="300" value={tempo} onChange={tempoHandler} />
+                BPM: {tempo} <input type="range" min="20" max="300" value={tempo} onChange={tempoHandler} />
                 Volume:<input type="range" min="-60" max="0" value={volume} onChange={volumeHandler} />
             </Controls>
         </Container>

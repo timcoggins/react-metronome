@@ -12,6 +12,7 @@ import minim from './../noun_Half Note_88569.png'
 const NoteValue =  styled.img`
 height: 30px;
   width: 30px;
+  cursor: pointer;
   .active {
     border: 3px #FF4141 solid;
   }
@@ -20,18 +21,21 @@ height: 30px;
 const Container = styled.div`
     background: white;
     width: 250px;
-    height: 230px;
+    height: 270px;
     border-bottom: #224422 3px dashed;
     border-right: #224422 3px dashed;
     text-align: left;
     padding: 10px;
+    margin: 0;
 
-      input {
+      input[type="number"] {
         width: 60px;
+        cursor: pointer;
       }
     
       button {
-        margin: 10px auto;
+        margin: 10px 3px;
+        cursor: pointer;
       }
 `
 
@@ -47,8 +51,9 @@ const StepEditor = (props) => {
 
     // State variables
     const [stepToEdit, setStepToEdit] = useState();
-    const [length, setLength] = useState(2)
-    const [base, setBase] = useState(4)
+    const [length, setLength] = useState(2);
+    const [base, setBase] = useState(4);
+    const [silentStep, setSilentStep] = useState(false);
 
 
     // When the parent updates the props, update our states
@@ -56,11 +61,13 @@ const StepEditor = (props) => {
         setStepToEdit(props.step)
         setLength(props.step.length)
         setBase(props.step.base)
+        setSilentStep(props.step.silent)
+        console.log(props.step.silent)
     }, [props.step])
 
     // When the user changes the length or bass, update
     // eslint-disable-next-line
-    useEffect(() => updateHandler(), [length, base])
+    useEffect(() => updateHandler(), [length, base, silentStep])
 
 
     /**
@@ -69,11 +76,12 @@ const StepEditor = (props) => {
 
     const updateHandler = () => {
         if(stepToEdit === undefined) return;
+        if(length <= 0) return
         const step = {
             id: stepToEdit.id,
             length: length,
             base: base,
-            playSub: false
+            silent: silentStep
         }
         props.updateStep(step)
     }
@@ -99,9 +107,6 @@ const StepEditor = (props) => {
         props.removeStep(stepToEdit.id)
     }
 
-    // TODO Add the possibility to choose a sound for a step
-    // Add the possibility to select a metronome sound group, say 3 types of sound low mid high
-
     // JSX
 
     return(
@@ -118,6 +123,10 @@ const StepEditor = (props) => {
                 <NoteValue className={ base === 4 ? 'active' : ''} src={crochet} onClick={() => setBase(4)}/>
                 <NoteValue className={ base === 2 ? 'active' : ''} src={quaver} onClick={() => setBase(2)}/>
                 <NoteValue className={ base === 1 ? 'active' : ''} src={semiquaver} onClick={() => setBase(1)}/>
+            </Control>
+            <Control>
+                <p>Silence Step:</p>
+                <input type='checkbox' checked={silentStep} onChange={() => setSilentStep(!silentStep)}/>
             </Control>
             <Control>
                 <p>Actions:</p>

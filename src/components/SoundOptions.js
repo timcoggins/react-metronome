@@ -54,7 +54,7 @@ const SoundOptions = (props) => {
             </Controls>
             <Controls>
                 <p>Mute Alt Sound</p>
-                <input type='checkbox' value={muteAlt} onChange={() => setMuteAlt(!muteAlt)}/>
+                <input type='checkbox' checked={muteAlt} onChange={() => setMuteAlt(!muteAlt)}/>
             </Controls>
 
         </Container>

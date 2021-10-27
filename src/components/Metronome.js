@@ -16,37 +16,37 @@ const initialData = [
         id: nanoid(),
         length: 3,
         base: 1,
-        playSub: true
+        silent: false
     },
     {
         id: nanoid(),
         length: 2,
         base: 2,
-        playSub: true
+        silent: false
     },
     {
         id: nanoid(),
         length: 4,
         base: 1,
-        playSub: false
+        silent: false
     },
     {
         id: nanoid(),
         length: 3,
         base: 2,
-        playSub: true
+        silent: false
     },
     {
         id: nanoid(),
         length: 5,
         base: 1,
-        playSub: true
+        silent: false
     },
     {
         id: nanoid(),
         length: 1,
         base: 8,
-        playSub: false
+        silent: false
     }
 ];
 
@@ -106,8 +106,10 @@ const Metronome = () => {
         //console.log(`STEP ${currentStep} SUB: ${currentSubStep}`)
 
         // Play a sound or something
-        if(currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.3);
-        else if(currentSubStep === 0) osc2.start(time).stop(time + 0.3);
+        if(!stepData[currentStep].silent) {
+            if (currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.3);
+            else if (currentSubStep === 0) osc2.start(time).stop(time + 0.3);
+        }
 
 
         // Increment the step counters!
@@ -120,11 +122,10 @@ const Metronome = () => {
                 currentLargeStep = 0;
                 if(currentStep >= stepData.length - 1) {
                     currentStep = 0
-                    setActiveStep(currentStep)
                 } else {
                     currentStep += 1;
-                    setActiveStep(currentStep)
                 }
+                setActiveStep(currentStep)
             }
         }
     }

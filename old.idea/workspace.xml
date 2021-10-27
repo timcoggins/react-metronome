@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="703e8071-555c-4853-bf52-f002a05d4f90" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/components/Block.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Block.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Metronome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Metronome.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SoundOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SoundOptions.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1zpWjDJhXzqP3ohuCwkC3I2g1dy" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/metronome/src" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="703e8071-555c-4853-bf52-f002a05d4f90" name="Changes" comment="" />
+      <created>1634845646587</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1634845646587</updated>
+      <workItem from="1634845653230" duration="320000" />
+      <workItem from="1634915492716" duration="10167000" />
+      <workItem from="1635238958591" duration="1188000" />
+      <workItem from="1635248861870" duration="26393000" />
+      <workItem from="1635287434440" duration="2515000" />
+      <workItem from="1635318603419" duration="1397000" />
+      <workItem from="1635320471047" duration="142000" />
+      <workItem from="1635320627226" duration="2072000" />
+      <workItem from="1635331129344" duration="4088000" />
+      <workItem from="1635343055871" duration="568000" />
+      <workItem from="1635345277632" duration="6869000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

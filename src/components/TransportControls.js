@@ -1,3 +1,10 @@
+/**
+ * Transport Controls
+ * Display the navbar and transport controls
+ */
+
+// Imports
+
 import styled from 'styled-components'
 import {useState} from 'react'
 import * as Tone from "tone";
@@ -5,19 +12,19 @@ import * as Tone from "tone";
 // Styles
 
 const Container = styled.div`
-  background: white;
-  margin: 0;
-  display: flex;
-  place-content: space-between;
-  align-items: center;
+    background: white;
+    margin: 0;
+    display: flex;
+    place-content: space-between;
+    align-items: center;
+    border-bottom: #224422 2px dashed;
   
-  border-bottom: #224422 3px dashed;
-  
-  h1 {
-    margin-left: 5px;
-    padding: 0;
-    font-size: 20px;
-  }
+    // Styles for the application title
+    h1 {
+        margin-left: 5px;
+        padding: 0;
+        font-size: 20px;
+    }
 `
 
 const Site = styled.div`
@@ -29,7 +36,6 @@ const Site = styled.div`
 const Controls = styled.div`
   display: flex;
   align-items: center;
-  
 `
 
 const Button = styled.button`
@@ -38,15 +44,17 @@ const Button = styled.button`
   width: 50px;
 `
 
-// Component
+/**
+ * TransportControls Componenet
+ * @param props
+ * @returns {JSX.Element}
+ */
 
 const TransportControls = (props) => {
 
     // State Variables
     const [tempo, setTempo] = useState(120)
     const [volume, setVolume] = useState(120)
-
-
 
     /**
      * Handles when the user changes the tempo slider
@@ -56,9 +64,6 @@ const TransportControls = (props) => {
         setTempo(event.target.value)
         Tone.Transport.bpm.value = event.target.value;
     }
-
-    // TODO Also display the specific BPM
-    // TODO Implement a better slider
 
     /**
      * Handles when the user changes the volume slider
@@ -70,13 +75,14 @@ const TransportControls = (props) => {
 
     return (
         <Container>
+            {/* Site Title */}
             <Site>
                 <span className="material-icons">timer</span>
                 <h1>Programmable Metronome</h1>
 
             </Site>
 
-
+            {/* Play Stop Tempo and Volume Controls */}
             <Controls>
                 <Button onClick={props.playButtonHandler}><span className="material-icons" style={{color: "green"}}>play_arrow</span></Button>
                 <Button onClick={props.stopButtonHandler}><span className="material-icons">stop</span></Button>

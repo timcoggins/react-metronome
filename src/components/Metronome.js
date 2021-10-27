@@ -3,6 +3,7 @@ import StepEditor from "./StepEditor";
 import TransportControls from './TransportControls'
 import SoundOptions from "./SoundOptions";
 import Notes from './Notes'
+import Drone from "./Drone";
 
 import styled from 'styled-components'
 import { useState } from "react";
@@ -58,13 +59,15 @@ const Container = styled.div`
 `
 
 // Main Component
-// TODO Implement the sound logic
 
 const Metronome = () => {
 
     // Setup ToneJS Oscillators
     const osc = new Tone.Player("./cr78/Bongo_Hi1_Orig_CR78.wav").toDestination();
     const osc2 = new Tone.Player("./cr78/Rim_Orig_CR78.wav").toDestination();
+    const osc3 = new Tone.Player("./cr78/Cowb_Orig_CR78.wav").toDestination();
+
+    let useReset = true;
 
     // Counters for Steps
     let currentStep = 0;
@@ -81,13 +84,14 @@ const Metronome = () => {
      * @param main
      * @param alt
      */
-    const changeSound = (main, alt) => {
+    const changeSound = (main, alt, reset) => {
         stopButtonHandler();
         console.log('updating the sounds')
         osc.load(`./${main}`)
             //.then((res) => console.log(res))
         osc2.load(`./${alt}`)
             //.then((res) => console.log(res))
+        osc3.load(`./${reset}`)
     }
 
     /**
@@ -95,6 +99,7 @@ const Metronome = () => {
      * @param muted
      */
     const muteAltSound = (muted) => osc2.mute = muted;
+    const toggleResetSound = (muted) => useReset = muted;
 
     /**
      * Manages the sequencing of audio events
@@ -107,7 +112,8 @@ const Metronome = () => {
 
         // Play a sound or something
         if(!stepData[currentStep].silent) {
-            if (currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.3);
+            if(currentStep === 0 && currentLargeStep === 0 && currentSubStep === 0 && useReset === true) osc3.start(time).stop(time + 0.3);
+            else if (currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.3);
             else if (currentSubStep === 0) osc2.start(time).stop(time + 0.3);
         }
 
@@ -178,10 +184,13 @@ const Metronome = () => {
     const addStep = (step) => setStepData([...stepData, step])
 
     /**
-     * Removes a step based on the id
+     * Removes a step based on the id, reset the step edit back to the first step
      * @param id
      */
-    const removeStep = (id) => setStepData(stepData.filter(item => item.id !== id))
+    const removeStep = (id) => {
+        setStepData(stepData.filter(item => item.id !== id))
+        setStepSelected(stepData[0])
+    }
 
     // JSX
 
@@ -193,7 +202,9 @@ const Metronome = () => {
                 <SoundOptions
                     changeSound={changeSound}
                     muteAltSound={muteAltSound}
+                    toggleResetSound={toggleResetSound}
                 />
+                {/*<Drone/>*/}
                 <Notes />
             </div>
             <StepGrid
@@ -201,6 +212,7 @@ const Metronome = () => {
                 editStep={editStep}
                 currentStep={activeStep}
                 selectedStep={stepSelected}
+                addStep={addStep}
             />
         </Container>
     </>)

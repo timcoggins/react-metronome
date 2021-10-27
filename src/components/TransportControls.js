@@ -8,6 +8,7 @@
 import styled from 'styled-components'
 import {useState} from 'react'
 import * as Tone from "tone";
+import logoImage from './../music.svg'
 
 // Styles
 
@@ -23,7 +24,7 @@ const Container = styled.div`
     h1 {
         margin-left: 5px;
         padding: 0;
-        font-size: 20px;
+        font-size: 22px;
     }
 `
 
@@ -31,6 +32,12 @@ const Site = styled.div`
   margin: 0 0 0 10px;
   display: flex;
   align-items: center;
+`
+
+const Logo = styled.img`
+  height: 30px;
+  width: 30px;
+  padding: 0 8px 0 0;
 `
 
 const Controls = styled.div`
@@ -89,8 +96,9 @@ const TransportControls = (props) => {
         <Container>
             {/* Site Title */}
             <Site>
-                <span className="material-icons">timer</span>
-                <h1>Programmable Metronome</h1>
+                {/*<span className="material-icons">timer</span>*/}
+                <Logo src={logoImage} />
+                <h1>Metronomical</h1>
 
             </Site>
 

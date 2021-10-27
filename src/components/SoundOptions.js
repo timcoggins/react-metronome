@@ -47,6 +47,7 @@ const Expand = styled.div`
   border-radius: 20px;
   display: grid;
   place-items: center;
+  margin-right: 10px;
 `
 
 /**

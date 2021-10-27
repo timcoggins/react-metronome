@@ -7,6 +7,8 @@
 
 import styled from 'styled-components'
 import { useState } from 'react'
+import {nanoid} from "nanoid";
+import patternData from "../patternList";
 
 // Styles
 
@@ -14,8 +16,6 @@ const Container = styled.div`
     width: 250px;
     border-bottom: #886F68 1px solid;
     border-right: #886F68 1px solid;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
     background: white;  
     padding: 10px;
     margin: 0;
@@ -44,30 +44,50 @@ const Expand = styled.div`
   margin-right: 10px;
 `
 
+const Controls = styled.div`
+    display: flex;
+    align-items: center;
+    place-content: space-between;
+  padding-bottom: 20px;
+    select {
+      border-radius: 5px;
+      padding: 2px;
+      width: 160px;
+    }
+`
+
+
+
 /**
  * Notes Component
  * @returns {JSX.Element}
  */
 
-const Notes = () => {
+const Patterns = (props) => {
 
     const [display, setDisplay] = useState(false)
+    const [selected, setSelect] = useState(0)
 
     return(
         <Container>
             <Heading>
-                <h3>Notes</h3>
+                <h3>Patterns</h3>
                 <Expand onClick={() => setDisplay(!display)}><span className="material-icons">
                     {display === true ? 'expand_less' : 'expand_more'}
                 </span></Expand>
             </Heading>
             {display === true && <div>
-                <p>Edits made will not be audible until the sequence has been stopped and started again</p>
-                <p>Same goes for changing the sounds or muting</p>
-                <p>Made by <a href='https://github.com/timcoggins'>Tim Coggins</a></p>
-            </div>}
+                <Controls>
+                    <select value={selected} onChange={(e) => setSelect(e.target.value)}>
+                        {patternData.map((item, index) =>
+                            <option value={index}>{item.name}</option>
+                        )}
+                    </select>
+                    <button onClick={() => props.setStepData(patternData[selected].data)}>Load</button>
+                </Controls>
+             </div>}
         </Container>
     );
 }
 
-export default Notes
+export default Patterns

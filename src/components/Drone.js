@@ -1,12 +1,12 @@
 // Styled Components
 
 import styled from "styled-components";
-import { useState} from "react";
+import { useState } from "react";
 import * as Tone from "tone";
 
 const Container = styled.div`
-    border-bottom: #224422 2px dashed;
-    border-right: #224422 2px dashed;
+    border-bottom: #886F68 1px solid;
+    border-right: #886F68 1px solid;
     padding: 10px;
     margin: 0;
     text-align: left;
@@ -35,13 +35,14 @@ const Expand = styled.div`
   border-radius: 20px;
   display: grid;
   place-items: center;
+  margin-right: 10px;
 `
 
 const droneFiles = [
     {
         file: './drones/01 Cello Drone C.mp3',
         name: 'C'
-    },
+    }/*,
     {
         file: './drones/02 Cello Drone G.mp3',
         name: 'G'
@@ -57,7 +58,7 @@ const droneFiles = [
     {
         file: './drones/03 Cello Drone E.mp3',
         name: 'E'
-    }
+    }*/
 ]
 
 
@@ -65,7 +66,7 @@ const Drone = (props) => {
     // State for the fold down display
     const [display, setDisplay] = useState(false)
 
-    const dronePlayer = new Tone.Player("./drones/01 Cello Drone C.mp3").toDestination();
+    //const dronePlayer = new Tone.Player("./drones/03 Cello Drone D.mp3").toDestination();
 
 
 
@@ -81,13 +82,13 @@ const Drone = (props) => {
                 <p>Key</p>
                 <select onChange={(e) => {
                     console.log(e.target.value)
-                    dronePlayer.load(e.target.value)
-                        .then(res => console.log(res))
+                    //dronePlayer.load(e.target.value)
+                        //.then(res => console.log(res))
                 }}>
                     {droneFiles.map(item => <option value={item.file}>{item.name}</option>)}
                 </select>
-                <button onClick={() => dronePlayer.start()}><span className="material-icons" style={{color: "green"}}>play_arrow</span></button>
-                <button onClick={() => dronePlayer.stop()}><span className="material-icons">stop</span></button>
+                {/*<button onClick={() => dronePlayer.start()}><span className="material-icons" style={{color: "green"}}>play_arrow</span></button>
+                <button onClick={() => dronePlayer.stop()}><span className="material-icons">stop</span></button>*/}
             </Controls>}
 
         </Container>

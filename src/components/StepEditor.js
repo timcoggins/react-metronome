@@ -21,11 +21,14 @@ import minim from './../noun_Half Note_88569.png'
 const Container = styled.div`
     background: white;
     width: 250px;
+    border-top: #886F68 1px solid;
     border-bottom: #886F68 1px solid;
     border-right: #886F68 1px solid;
     text-align: left;
     padding: 10px;
     margin: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 
     input[type="number"] {
       width: 60px;
@@ -68,6 +71,7 @@ const Expand = styled.div`
   width: 30px;
   height: 30px;
   padding: 1px;
+  margin-right: 10px;
   background: gainsboro;
   border-radius: 20px;
   display: grid;

@@ -4,11 +4,13 @@ import TransportControls from './TransportControls'
 import SoundOptions from "./SoundOptions";
 import Notes from './Notes'
 import Drone from "./Drone";
+import Patterns from "./Patterns";
 
 import styled from 'styled-components'
 import { useState } from "react";
 import { nanoid } from 'nanoid'
 import * as Tone from "tone";
+
 
 // Start up sequence
 
@@ -44,6 +46,11 @@ const initialData = [
 const Container = styled.div`
   display: flex;
   margin: 0 auto;
+`
+
+const SideBar = styled.div`
+margin: 10px;
+  
 `
 
 // Main Component
@@ -197,16 +204,19 @@ const Metronome = () => {
             updateVolume={updateVolume}
         />
         <Container>
-            <div>
+            <SideBar>
                 {stepSelected && <StepEditor step={stepSelected} updateStep={updateStep} addStep={addStep} removeStep={removeStep}/>}
                 <SoundOptions
                     changeSound={changeSound}
                     muteAltSound={muteAltSound}
                     toggleResetSound={toggleResetSound}
                 />
+                <Patterns
+                    setStepData={setStepData}
+                />
                 {/*<Drone/>*/}
                 <Notes />
-            </div>
+            </SideBar>
             <StepGrid
                 stepData = {stepData}
                 editStep={editStep}

@@ -19,7 +19,7 @@ const Container = styled.div`
     flex-wrap: wrap;
     align-content: flex-start;
     gap: 5px;
-    height: 93vh;
+
     
     /*
     background-color: #113311;

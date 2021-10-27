@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { useState } from "react";
-import * as Tone from "tone";
+//import * as Tone from "tone";
 
 const Container = styled.div`
     border-bottom: #886F68 1px solid;

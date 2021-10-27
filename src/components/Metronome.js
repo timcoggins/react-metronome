@@ -3,7 +3,7 @@ import StepEditor from "./StepEditor";
 import TransportControls from './TransportControls'
 import SoundOptions from "./SoundOptions";
 import Notes from './Notes'
-import Drone from "./Drone";
+//import Drone from "./Drone";
 import Patterns from "./Patterns";
 
 import styled from 'styled-components'

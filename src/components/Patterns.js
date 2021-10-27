@@ -80,7 +80,7 @@ const Patterns = (props) => {
                 <Controls>
                     <select value={selected} onChange={(e) => setSelect(e.target.value)}>
                         {patternData.map((item, index) =>
-                            <option value={index}>{item.name}</option>
+                            <option key={nanoid} value={index}>{item.name}</option>
                         )}
                     </select>
                     <button onClick={() => props.setStepData(patternData[selected].data)}>Load</button>

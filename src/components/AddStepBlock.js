@@ -6,7 +6,6 @@
 // Import
 
 import styled from "styled-components";
-//import { css } from 'styled-components'
 import {nanoid} from "nanoid";
 
 // Styles
@@ -20,25 +19,21 @@ const StyledBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-  place-content: center;
+    place-content: center;
   
     cursor: pointer;
   
     opacity: 0.4;
     color: white;
-    
+  
+    background: #477147;
     backdrop-filter: blur(25px) saturate(191%);
     -webkit-backdrop-filter: blur(25px) saturate(191%);
-    //background-color: rgba(255, 255, 255, 0.62);
   
     &:hover {
       background-color: rgba(199, 199, 199, 0.75)
     }
-
-      background: #477147;
-
-
-`
+`;
 
 
 /**

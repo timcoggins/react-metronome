@@ -1,101 +1,53 @@
+/**
+ * Metronome.js
+ * Main top level component for the app
+ */
+
+// Imports
+import { Container, SideBar } from "./atoms/MainWindow";
+import { useState } from "react";
+import * as Tone from "tone";
+import patternList from "../data/patternList";
+
 import StepGrid from "./StepGrid";
 import StepEditor from "./StepEditor";
 import TransportControls from './TransportControls'
 import SoundOptions from "./SoundOptions";
 import Notes from './Notes'
-//import Drone from "./Drone";
+import Drone from "./Drone";
 import Patterns from "./Patterns";
 
-import styled from 'styled-components'
-import { useState } from "react";
-import { nanoid } from 'nanoid'
-import * as Tone from "tone";
+
+// Globals
+const initialData = patternList[0].data // Load the initial pattern
+
+// Setup ToneJS volume node and sample players
+const vol = new Tone.Volume().toDestination();
+const osc = new Tone.Player("./cr78/Bongo_Hi1_Orig_CR78.wav").connect(vol);
+const osc2 = new Tone.Player("./cr78/Rim_Orig_CR78.wav").connect(vol);
+const osc3 = new Tone.Player("./cr78/Cowb_Orig_CR78.wav").connect(vol);
+
+let useReset = true;
+
+// Counters for Steps
+let currentStep = 0;
+let currentLargeStep = 0
+let currentSubStep = 0;
 
 
-// Start up sequence
-
-const initialData = [
-    {
-        id: nanoid(),
-        length: 3,
-        base: 1,
-        silent: false
-    },
-    {
-        id: nanoid(),
-        length: 2,
-        base: 2,
-        silent: false
-    },
-    {
-        id: nanoid(),
-        length: 2,
-        base: 2,
-        silent: false
-    },
-    {
-        id: nanoid(),
-        length: 3,
-        base: 2,
-        silent: false
-    }
-];
-
-// Styled Components
-
-const Container = styled.div`
-  display: flex;
-  margin: 0 auto;
-`
-
-const SideBar = styled.div`
-margin: 10px;
-  
-`
-
-// Main Component
+/**
+ * Metronome Component
+ * @returns {JSX.Element}
+ * @constructor
+ */
 
 const Metronome = () => {
-
-    const vol = new Tone.Volume().toDestination();
-    // Setup ToneJS Oscillators
-    const osc = new Tone.Player("./cr78/Bongo_Hi1_Orig_CR78.wav").connect(vol);
-    const osc2 = new Tone.Player("./cr78/Rim_Orig_CR78.wav").connect(vol);
-    const osc3 = new Tone.Player("./cr78/Cowb_Orig_CR78.wav").connect(vol);
-
-    let useReset = true;
-
-    // Counters for Steps
-    let currentStep = 0;
-    let currentLargeStep = 0
-    let currentSubStep = 0;
 
     // State variable to hold the step data
     const [stepData, setStepData] = useState(initialData)
     const [stepSelected, setStepSelected] = useState(stepData[0])
     const [activeStep, setActiveStep] = useState(0)
-
-    /**
-     * Update the click sounds
-     * @param main
-     * @param alt
-     */
-    const changeSound = (main, alt, reset) => {
-        stopButtonHandler();
-        console.log('updating the sounds')
-        osc.load(`./${main}`)
-            //.then((res) => console.log(res))
-        osc2.load(`./${alt}`)
-            //.then((res) => console.log(res))
-        osc3.load(`./${reset}`)
-    }
-
-    /**
-     * Mutes the sound of the alternate sample
-     * @param muted
-     */
-    const muteAltSound = (muted) => osc2.mute = muted;
-    const toggleResetSound = (muted) => useReset = muted;
+    const [isPlaying, setIsPlaying] = useState(false);
 
     /**
      * Manages the sequencing of audio events
@@ -104,15 +56,12 @@ const Metronome = () => {
      */
     const Step = (time) => {
 
-        //console.log(`STEP ${currentStep} SUB: ${currentSubStep}`)
-
         // Play a sound or something
         if(!stepData[currentStep].silent) {
             if(currentStep === 0 && currentLargeStep === 0 && currentSubStep === 0 && useReset === true) osc3.start(time).stop(time + 0.3);
             else if (currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.3);
             else if (currentSubStep === 0) osc2.start(time).stop(time + 0.3);
         }
-
 
         // Increment the step counters!
         if (currentSubStep < stepData[currentStep].base - 1) {
@@ -133,29 +82,49 @@ const Metronome = () => {
     }
 
     /**
-     * Handles the play button
+     * Update the click sounds
+     * @param main
+     * @param alt
+     * @param reset
      */
-    const playButtonHandler = () => {
-        if(Tone.Transport.state === 'started') return;
-        // Reset back to zero
-        currentStep = 0;
-        currentSubStep = 0;
-        setActiveStep(currentStep)
-        // Schedules the clock
-        Tone.Transport.scheduleRepeat((time) => Step(time), "16n");
-        // Start ToneJS
-        Tone.start()
-            .then(() => Tone.Transport.start())
+    const changeSound = (main, alt, reset) => {
+        osc.load(`./${main}`)
+        osc2.load(`./${alt}`)
+        osc3.load(`./${reset}`)
     }
 
     /**
-     * Handles the stop button
-     * @returns {Transport}
+     * Mutes the sound of the alternate sample
+     * @param muted
      */
-    const stopButtonHandler = () => {
-        if(Tone.Transport.state === 'stopped') return;
-        Tone.Transport.cancel()
-        Tone.Transport.stop();
+    const muteAltSound = (muted) => osc2.mute = muted;
+    const toggleResetSound = (muted) => useReset = muted;
+
+    /**
+     * Handles the play button
+     */
+    const playStopButtonHandler = () => {
+        if(Tone.Transport.state === 'stopped') {
+            // Reset back to zero
+            currentStep = 0;
+            currentLargeStep = 0;
+            currentSubStep = 0;
+            setActiveStep(currentStep)
+            // Schedules the clock
+            Tone.Transport.scheduleRepeat((time) => Step(time), "16n");
+            // Start ToneJS
+            Tone.start()
+                .then(() => Tone.Transport.start())
+            setIsPlaying(true)
+            return;
+        }
+
+        if(Tone.Transport.state === 'started') {
+            Tone.Transport.cancel()
+            Tone.Transport.stop();
+            setIsPlaying(false)
+            return;
+        }
     }
 
     /**
@@ -199,8 +168,8 @@ const Metronome = () => {
     return(<>
         <TransportControls
             tone={Tone}
-            playButtonHandler={playButtonHandler}
-            stopButtonHandler={stopButtonHandler}
+            playStopButtonHandler={playStopButtonHandler}
+            isPlaying={isPlaying}
             updateVolume={updateVolume}
         />
         <Container>
@@ -214,7 +183,7 @@ const Metronome = () => {
                 <Patterns
                     setStepData={setStepData}
                 />
-                {/*<Drone/>*/}
+                <Drone/>
                 <Notes />
             </SideBar>
             <StepGrid

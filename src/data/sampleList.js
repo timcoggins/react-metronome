@@ -17,15 +17,15 @@ const samples = [
     },
     {
         name:'Clap',
-        file: 'clap.wav'
+        file: 'samples/clap.wav'
     },
     {
         name:'Snare',
-        file: 'snare.wav'
+        file: 'samples/snare.wav'
     },
     {
         name:'Tom',
-        file: 'tom.wav'
+        file: 'samples/tom.wav'
     }
 ];
 

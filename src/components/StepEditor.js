@@ -6,77 +6,36 @@
 // Imports
 
 import styled from 'styled-components'
+import { css } from 'styled-components'
+import { Container, Expand, Heading, Controls } from './atoms/SideBar'
 import { nanoid } from "nanoid";
 import { useState, useEffect } from 'react'
 
 // Import the note images
 
-import quaver from './../noun_quaver_1688935.png'
-import semiquaver from './../noun_Sixteenth Note_88567.png'
-import crochet from './../noun_quarter note_88568.png'
-import minim from './../noun_Half Note_88569.png'
+import quaver from '../images/noun_quaver_1688935.png'
+import semiquaver from '../images/noun_Sixteenth Note_88567.png'
+import crochet from '../images/noun_quarter note_88568.png'
+import minim from '../images/noun_Half Note_88569.png'
 
 // Styled Components
 
-const Container = styled.div`
-    background: white;
-    width: 250px;
+const TopContainer = styled(Container)`
     border-top: #886F68 1px solid;
-    border-bottom: #886F68 1px solid;
-    border-right: #886F68 1px solid;
-    text-align: left;
-    padding: 10px;
-    margin: 0;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
-
-    input[type="number"] {
-      width: 60px;
-      cursor: pointer;
-    }
-    
-    button {
-      margin: 10px 3px;
-      cursor: pointer;
-    }
-`
-
-const Controls = styled.div`
-    display: flex;
-    place-content: space-between;
-    align-items: center;
-`
+`;
 
 const NoteValue =  styled.img`
     height: 30px;
     width: 30px;
     cursor: pointer;
     padding: 5px;
-    //border-radius: 5px;
-    .active {
-      //border: 1px #0075ff solid;
-      //background: black;
-    }
-`
 
-const Heading = styled.div`
-  display: flex;
-  place-content: space-between;
-  align-items: center;
-  cursor: pointer;
-`
-
-const Expand = styled.div`
-  color: white;
-  width: 30px;
-  height: 30px;
-  padding: 1px;
-  margin-right: 10px;
-  background: gainsboro;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-`
+    ${props => props.active && css`
+      background: #efefef;
+    `}
+`;
 
 /**
  * StepEditor Component
@@ -150,29 +109,30 @@ const StepEditor = (props) => {
     // JSX Elements
 
     return(
-        <Container>
+        <TopContainer>
             {/* Title for the editor */}
-            <Heading>
+            <Heading onClick={() => setDisplay(!display)}>
                 <h3>Step Editor</h3>
-                <Expand onClick={() => setDisplay(!display)}><span className="material-icons">
+                <Expand><span className="material-icons">
                     {display === true ? 'expand_less' : 'expand_more'}
                 </span></Expand>
             </Heading>
 
             {display === true && <div>
+
+                {/* UI Element for selecting the division of the step */}
+                <Controls>
+                    <p>Division:</p>
+                    <NoteValue active={ stepBase === 8 } src={minim} onClick={() => setStepBase(8)}/>
+                    <NoteValue active={ stepBase === 4 } src={crochet} onClick={() => setStepBase(4)}/>
+                    <NoteValue active={ stepBase === 2 } src={quaver} onClick={() => setStepBase(2)}/>
+                    <NoteValue active={ stepBase === 1 } src={semiquaver} onClick={() => setStepBase(1)}/>
+                </Controls>
+
                 {/* UI Element for controlling how many times a step repeats */}
                 <Controls>
                     <p>Repeats:</p>
                     <input type='number' value={stepLength} onChange={(e) => setStepLength(e.target.value)}/>
-                </Controls>
-
-                {/* UI Element for selecting the division of the step */}
-                <Controls>
-                <p>Division:</p>
-                    <NoteValue className={ stepBase === 8 ? 'active' : ''} src={minim} onClick={() => setStepBase(8)}/>
-                    <NoteValue className={ stepBase === 4 ? 'active' : ''} src={crochet} onClick={() => setStepBase(4)}/>
-                    <NoteValue className={ stepBase === 2 ? 'active' : ''} src={quaver} onClick={() => setStepBase(2)}/>
-                    <NoteValue className={ stepBase === 1 ? 'active' : ''} src={semiquaver} onClick={() => setStepBase(1)}/>
                 </Controls>
 
                 {/* UI Element for toggling if the step is silent */}
@@ -190,7 +150,7 @@ const StepEditor = (props) => {
                     </div>
                 </Controls>
             </div>}
-        </Container>
+        </TopContainer>
     )
 }
 

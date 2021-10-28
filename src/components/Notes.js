@@ -7,42 +7,14 @@
 
 import styled from 'styled-components'
 import { useState } from 'react'
+import { Container, Heading, Expand } from './atoms/SideBar'
 
 // Styles
 
-const Container = styled.div`
-    width: 250px;
-    border-bottom: #886F68 1px solid;
-    border-right: #886F68 1px solid;
+const BottomContainer = styled(Container)`
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    background: white;  
-    padding: 10px;
-    margin: 0;
-    text-align: left;
-    p {
-      word-wrap: break-word;
-    }
-`
-
-const Heading = styled.div`
-  display: flex;
-  place-content: space-between;
-  align-items: center;
-  cursor: pointer;
-`
-
-const Expand = styled.div`
-  color: white;
-  width: 30px;
-  height: 30px;
-  padding: 1px;
-  background: gainsboro;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-  margin-right: 10px;
-`
+`;
 
 /**
  * Notes Component
@@ -54,10 +26,10 @@ const Notes = () => {
     const [display, setDisplay] = useState(false)
 
     return(
-        <Container>
-            <Heading>
-                <h3>Notes</h3>
-                <Expand onClick={() => setDisplay(!display)}><span className="material-icons">
+        <BottomContainer>
+            <Heading onClick={() => setDisplay(!display)}>
+                <h3>About</h3>
+                <Expand><span className="material-icons">
                     {display === true ? 'expand_less' : 'expand_more'}
                 </span></Expand>
             </Heading>
@@ -66,7 +38,7 @@ const Notes = () => {
                 <p>Same goes for changing the sounds or muting</p>
                 <p>Made by <a href='https://github.com/timcoggins'>Tim Coggins</a></p>
             </div>}
-        </Container>
+        </BottomContainer>
     );
 }
 

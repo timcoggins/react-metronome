@@ -7,48 +7,8 @@
 
 import { nanoid } from "nanoid";
 import { useState, useEffect } from 'react'
-import styled from "styled-components";
-import sampleList from "../sampleList";
-
-// Styled Components
-
-const Container = styled.div`
-    border-bottom: #886F68 1px solid;
-    border-right: #886F68 1px solid;
-    padding: 10px;
-    margin: 0;
-    text-align: left;
-    background: white;
-`
-
-const Controls = styled.div`
-    display: flex;
-    align-items: center;
-    place-content: space-between;
-    select {
-      border-radius: 5px;
-      padding: 2px;
-    }
-`
-
-const Heading = styled.div`
-  display: flex;
-  place-content: space-between;
-  align-items: center;
-  cursor: pointer;
-`
-
-const Expand = styled.div`
-  color: white;
-  width: 30px;
-  height: 30px;
-  padding: 1px;
-  background: gainsboro;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-  margin-right: 10px;
-`
+import { Container, Expand, Heading, Controls } from './atoms/SideBar'
+import sampleList from "../data/sampleList";
 
 /**
  * Sound Options Component
@@ -86,9 +46,9 @@ const SoundOptions = (props) => {
     return(
         <Container>
             {/* Title for the options */}
-            <Heading>
+            <Heading onClick={() => setDisplay(!display)}>
                 <h3>Sound Options</h3>
-                <Expand onClick={() => setDisplay(!display)}><span className="material-icons">
+                <Expand><span className="material-icons">
                     {display === true ? 'expand_less' : 'expand_more'}
                 </span></Expand>
             </Heading>
@@ -116,7 +76,7 @@ const SoundOptions = (props) => {
                 <Controls>
                     <p>Reset Sound:</p>
                     <input type='checkbox' checked={toggleReset} onChange={() => setToggleReset(!toggleReset)}/>
-                    <select value={altSound} disabled={!toggleReset} onChange={(e) => setResetSound(e.target.value)}>
+                    <select value={resetSound} disabled={!toggleReset} onChange={(e) => setResetSound(e.target.value)}>
                         {sampleList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
                     </select>
                 </Controls>

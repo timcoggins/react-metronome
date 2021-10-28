@@ -5,60 +5,10 @@
 
 // Imports
 
-import styled from 'styled-components'
 import {useState} from 'react'
+import { Container, Site, Logo, Controls, Button, SliderContainer } from './atoms/TopBar'
 import * as Tone from "tone";
-import logoImage from './../music.svg'
-
-// Styles
-
-const Container = styled.div`
-    background: white;
-    margin: 0;
-    display: flex;
-    place-content: space-between;
-    align-items: center;
-    border-bottom: #886F68 1px solid;
-  
-    // Styles for the application title
-    h1 {
-        margin-left: 5px;
-        padding: 0;
-        font-size: 22px;
-    }
-`
-
-const Site = styled.div`
-  margin: 0 0 0 10px;
-  display: flex;
-  align-items: center;
-`
-
-const Logo = styled.img`
-  height: 30px;
-  width: 30px;
-  padding: 0 8px 0 0;
-`
-
-const Controls = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const Button = styled.button`
-  margin: 5px;
-  height: 30px;
-  width: 50px;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-`
-
-const SliderContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-size: 12px;
-`
+import logoImage from '../images/music.svg'
 
 /**
  * TransportControls Componenet
@@ -104,8 +54,14 @@ const TransportControls = (props) => {
 
             {/* Play Stop Tempo and Volume Controls */}
             <Controls>
-                <Button onClick={props.playButtonHandler}><span className="material-icons" style={{color: "green"}}>play_arrow</span></Button>
-                <Button onClick={props.stopButtonHandler}><span className="material-icons">stop</span></Button>
+                <Button onClick={props.playStopButtonHandler}>
+                    <span
+                        className="material-icons"
+                        style={props.isPlaying === true ? {color: 'black'} : {color: 'green'}}
+                    >
+                        {props.isPlaying === true ? 'stop' : 'play_arrow'}
+                    </span>
+                </Button>
             </Controls>
             <Controls>
                 <SliderContainer>
@@ -114,7 +70,7 @@ const TransportControls = (props) => {
                 </SliderContainer>
                 <SliderContainer>
                     {volume}db
-                    <input type="range" min="-60" max="0" value={volume} onChange={volumeHandler} />
+                    <input type="range" min="-40" max="0" value={volume} onChange={volumeHandler} />
                 </SliderContainer>
             </Controls>
         </Container>

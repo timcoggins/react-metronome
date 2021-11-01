@@ -23,9 +23,9 @@ const initialData = patternList[0].data // Load the initial pattern
 
 // Setup ToneJS volume node and sample players
 const vol = new Tone.Volume().toDestination();
-const osc = new Tone.Player("./cr78/Bongo_Hi1_Orig_CR78.wav").connect(vol);
-const osc2 = new Tone.Player("./cr78/Rim_Orig_CR78.wav").connect(vol);
-const osc3 = new Tone.Player("./cr78/Cowb_Orig_CR78.wav").connect(vol);
+const osc = new Tone.Player("./samples/BD CR78 MPC60 05.wav").connect(vol);
+const osc2 = new Tone.Player("./samples/Clave CR78 MPC60 10.wav").connect(vol);
+const osc3 = new Tone.Player("./samples/CLICKHIGH.wav").connect(vol);
 
 let useReset = true;
 
@@ -58,9 +58,9 @@ const Metronome = () => {
 
         // Play a sound or something
         if(!stepData[currentStep].silent) {
-            if(currentStep === 0 && currentLargeStep === 0 && currentSubStep === 0 && useReset === true) osc3.start(time).stop(time + 0.3);
-            else if (currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.3);
-            else if (currentSubStep === 0) osc2.start(time).stop(time + 0.3);
+            if(currentStep === 0 && currentLargeStep === 0 && currentSubStep === 0 && useReset === true) osc3.start(time).stop(time + 0.2);
+            else if (currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.2);
+            else if (currentSubStep === 0) osc2.start(time).stop(time + 0.2);
         }
 
         // Increment the step counters!
@@ -181,6 +181,7 @@ const Metronome = () => {
                     toggleResetSound={toggleResetSound}
                 />
                 <Patterns
+                    stepData={stepData}
                     setStepData={setStepData}
                 />
                 <Drone/>

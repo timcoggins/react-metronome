@@ -89,7 +89,7 @@ const Block = (props) => {
             onClick={() => props.editStep(props.value.id)}
             disabled={props.value.silent}
         >
-            <h2>{props.value.length}</h2>
+             <h2>{props.value.length}</h2>
             <Note src={findNote(props.value.base)}/>
         </StyledBlock>
     )

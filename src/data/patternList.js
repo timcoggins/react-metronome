@@ -1,3 +1,6 @@
+
+
+
 import {nanoid} from "nanoid";
 
 const patternData = [
@@ -75,7 +78,78 @@ const patternData = [
                 base: 4,
                 silent: false
             }
+        ],
+    },
+
+
+    {
+        name: 'Tomas 11/8',
+        data: [
+            {
+                id: nanoid(),
+                length: 2,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 3,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 2,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 3,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 2,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 3,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 2,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 2,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 2,
+                base: 1,
+                silent: false
+            },
+            {
+                id: nanoid(),
+                length: 1,
+                base: 1,
+                silent: false
+            }
         ]
+   // }
+
+
+
     }
 ]
 

@@ -5,7 +5,7 @@
 
 // Imports
 import { Container, SideBar } from "./atoms/MainWindow";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import * as Tone from "tone";
 import patternList from "../data/patternList";
 
@@ -17,6 +17,7 @@ import Notes from './Notes'
 import Drone from "./Drone";
 import Patterns from "./Patterns";
 import {useParams} from "react-router-dom";
+import axios from "axios";
 
 
 // Globals
@@ -35,9 +36,6 @@ let currentStep = 0;
 let currentLargeStep = 0
 let currentSubStep = 0;
 
-
-
-
 /**
  * Metronome Component
  * @returns {JSX.Element}
@@ -47,12 +45,20 @@ let currentSubStep = 0;
 const Metronome = () => {
     const { id } = useParams();
 
-
     // State variable to hold the step data
     const [stepData, setStepData] = useState(initialData)
     const [stepSelected, setStepSelected] = useState(stepData[0])
     const [activeStep, setActiveStep] = useState(0)
     const [isPlaying, setIsPlaying] = useState(false);
+
+    // If a pattern was specified, fetch it and load it
+    useEffect(() => {
+        if(id !== null) {
+            axios.get(`http://localhost/patterns/${id}`)
+                .then(response => setStepData(response.data.data))
+                .catch(error => console.log(error));
+        }
+    })
 
     /**
      * Manages the sequencing of audio events

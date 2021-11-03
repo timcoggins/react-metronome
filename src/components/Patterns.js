@@ -4,10 +4,10 @@
  */
 
 // Imports
-
-import { useState, useEffect } from 'react'
-import {nanoid} from "nanoid";
 import axios from "axios";
+import { useState, useEffect } from 'react'
+import { nanoid } from "nanoid";
+import { Link } from 'react-router-dom';
 import { Container, Expand, Heading, Controls } from './atoms/SideBar'
 
 /**
@@ -17,21 +17,26 @@ import { Container, Expand, Heading, Controls } from './atoms/SideBar'
 
 const Patterns = (props) => {
 
+    // Declare state variables
+
     const [patternList, setPatternList] = useState([])
     const [display, setDisplay] = useState(false)
     const [selected, setSelect] = useState(0)
-    const userToken = localStorage.getItem('usertoken');
-    const [status, setStatus] = useState()
+    const [userToken, setUserToken] = useState(localStorage.getItem('usertoken'))
 
-    useEffect(() => {
-        if(userToken === null) {
-            setStatus('Not Logged In')
-        } else {
-            setStatus('Ready')
-        }
-    }, [])
+    // Get the users token
+
+    useEffect(() => setUserToken(localStorage.getItem('usertoken')), [])
 
 
+    /**
+     * Handles the logout button
+     */
+
+    const logoutHandler = () => {
+        localStorage.clear();
+        setUserToken('');
+    }
 
     /**
      * Axios request to get the patterns
@@ -72,11 +77,9 @@ const Patterns = (props) => {
         })
             .then(response => {
                 console.log(response)
-                setStatus('Saved')
             })
             .catch(error => {
                 console.log(error)
-                setStatus('Error')
             });
         getPatternList();
     }
@@ -102,7 +105,9 @@ const Patterns = (props) => {
                     {userToken !== null && <button onClick={saveHandler}>Save</button>}
 
                 </Controls>
-                <p>{status}</p>
+
+                {userToken === null && <Link to={'/login'}>Login</Link>}
+                {userToken !== null && <button onClick={logoutHandler}>Logout</button>}
              </div>}
         </Container>
     );

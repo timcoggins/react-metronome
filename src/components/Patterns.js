@@ -20,7 +20,16 @@ const Patterns = (props) => {
     const [patternList, setPatternList] = useState([])
     const [display, setDisplay] = useState(false)
     const [selected, setSelect] = useState(0)
+    const userToken = localStorage.getItem('usertoken');
+    const [status, setStatus] = useState()
 
+    useEffect(() => {
+        if(userToken === null) {
+            setStatus('Not Logged In')
+        } else {
+            setStatus('Ready')
+        }
+    }, [])
 
 
 
@@ -42,16 +51,33 @@ const Patterns = (props) => {
      */
     const saveHandler = () => {
 
+        if(userToken === null) {
+            console.log('You are not logged in')
+            return
+        }
         const name = prompt('Name of the pattern')
+        if(name === '') return;
         const author = prompt('Author')
+        if(name === '') return;
 
         axios.post('http://localhost/patterns', {
             name: name,
             author: author,
             data: props.stepData
+        }, {
+            headers: {
+                Authorization:
+                    `Bearer ${userToken}`,
+            }
         })
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
+            .then(response => {
+                console.log(response)
+                setStatus('Saved')
+            })
+            .catch(error => {
+                console.log(error)
+                setStatus('Error')
+            });
         getPatternList();
     }
 
@@ -73,8 +99,10 @@ const Patterns = (props) => {
                         )}
                     </select>
                     <button onClick={() => props.setStepData(patternList[selected].data)}>Load</button>
-                    <button onClick={saveHandler}>Save</button>
+                    {userToken !== null && <button onClick={saveHandler}>Save</button>}
+
                 </Controls>
+                <p>{status}</p>
              </div>}
         </Container>
     );

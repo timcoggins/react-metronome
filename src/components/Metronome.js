@@ -16,6 +16,7 @@ import SoundOptions from "./SoundOptions";
 import Notes from './Notes'
 import Drone from "./Drone";
 import Patterns from "./Patterns";
+import {useParams} from "react-router-dom";
 
 
 // Globals
@@ -35,6 +36,8 @@ let currentLargeStep = 0
 let currentSubStep = 0;
 
 
+
+
 /**
  * Metronome Component
  * @returns {JSX.Element}
@@ -42,6 +45,8 @@ let currentSubStep = 0;
  */
 
 const Metronome = () => {
+    const { id } = useParams();
+
 
     // State variable to hold the step data
     const [stepData, setStepData] = useState(initialData)

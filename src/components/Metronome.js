@@ -4,21 +4,21 @@
  */
 
 // Imports
-import { Container, SideBar } from "./atoms/MainWindow";
+import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import * as Tone from "tone";
+import { Container, SideBar } from "./atoms/MainWindow";
 import patternList from "../data/patternList";
 
-import StepGrid from "./StepGrid";
-import StepEditor from "./StepEditor";
-import TransportControls from './TransportControls'
-import SoundOptions from "./SoundOptions";
-import Notes from './Notes'
-import Drone from "./Drone";
-import Patterns from "./Patterns";
-import {useParams} from "react-router-dom";
-import axios from "axios";
-
+// Import sub components
+import StepGrid from "./molecules/StepGrid";
+import StepEditor from "./molecules/StepEditor";
+import TransportControls from './molecules/TransportControls'
+import SoundOptions from "./molecules/SoundOptions";
+import Notes from './molecules/Notes'
+import Drone from "./molecules/Drone";
+import Patterns from "./molecules/Patterns";
 
 // Globals
 const initialData = patternList[0].data // Load the initial pattern
@@ -41,11 +41,12 @@ let currentSubStep = 0;
  * @returns {JSX.Element}
  * @constructor
  */
-
 const Metronome = () => {
+    // Get the ID from the URL
     const { id } = useParams();
 
     // State variable to hold the step data
+    const [patternData, setPatternData] = useState();
     const [stepData, setStepData] = useState(initialData)
     const [stepSelected, setStepSelected] = useState(stepData[0])
     const [activeStep, setActiveStep] = useState(0)
@@ -55,7 +56,11 @@ const Metronome = () => {
     useEffect(() => {
         if(id !== null) {
             axios.get(`http://localhost/patterns/${id}`)
-                .then(response => setStepData(response.data.data))
+                .then(response => {
+                    // TODO Remove step data
+                    setStepData(response.data.data)
+                    setPatternData(response.data)
+                })
                 .catch(error => console.log(error));
         }
     })

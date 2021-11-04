@@ -1,6 +1,6 @@
 
-import { Container, Site, Logo} from './atoms/TopBar'
-import logoImage from "../images/music.svg";
+import { Container, Site, Logo} from '../atoms/TopBar'
+import logoImage from "../../images/music.svg";
 
 /**
  * Component for the Navbar (not used on metronome page)

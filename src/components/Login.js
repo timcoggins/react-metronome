@@ -1,7 +1,16 @@
-import NavBar from "./NavBar";
+/**
+ * Login Page
+ * Allows user to login
+ */
+
+// Imports
+
+import axios from "axios";
 import styled from "styled-components";
 import { useState } from 'react';
-import axios from "axios";
+import NavBar from "./molecules/NavBar";
+
+// Styled components
 
 const Container = styled.div`
   display: grid;
@@ -35,12 +44,20 @@ const UserMessage = styled.p`
   padding: 5px;
 `
 
-
-
+/**
+ * Login Component
+ * @returns {JSX.Element}
+ */
 
 const Login = () => {
 
+    // State to store the user message
     const [resMessage, setResMessage] = useState('')
+
+    /**
+     * Logic for when the user submits the login form
+     * @param e
+     */
 
     const HandleSubmit = (e) => {
         e.preventDefault();
@@ -68,6 +85,7 @@ const Login = () => {
             });
     }
 
+    // JSX
 
     return(
         <>

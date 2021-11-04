@@ -5,12 +5,12 @@
 
 // Imports
 
-import { Container, Expand, Heading, Controls } from './atoms/SideBar'
-import { SliderContainer} from "./atoms/TopBar";
+import { Container, Expand, Heading, Controls } from '../atoms/SideBar'
+import { SliderContainer} from "../atoms/TopBar";
 import { useState } from "react";
 import * as Tone from "tone";
-import {Button} from "./atoms/TopBar";
-import droneList from "../data/droneList";
+import {Button} from "../atoms/TopBar";
+import droneList from "../../data/droneList";
 
 
 // Globals

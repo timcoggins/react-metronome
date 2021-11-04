@@ -7,7 +7,7 @@
 
 import styled from 'styled-components'
 import { useState } from 'react'
-import { Container, Heading, Expand } from './atoms/SideBar'
+import { Container, Heading, Expand } from '../atoms/SideBar'
 
 // Styles
 

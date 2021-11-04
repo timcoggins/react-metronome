@@ -7,16 +7,16 @@
 
 import styled from 'styled-components'
 import { css } from 'styled-components'
-import { Container, Expand, Heading, Controls } from './atoms/SideBar'
+import { Container, Expand, Heading, Controls } from '../atoms/SideBar'
 import { nanoid } from "nanoid";
 import { useState, useEffect } from 'react'
 
 // Import the note images
 
-import quaver from '../images/noun_quaver_1688935.png'
-import semiquaver from '../images/noun_Sixteenth Note_88567.png'
-import crochet from '../images/noun_quarter note_88568.png'
-import minim from '../images/noun_Half Note_88569.png'
+import quaver from '../../images/noun_quaver_1688935.png'
+import semiquaver from '../../images/noun_Sixteenth Note_88567.png'
+import crochet from '../../images/noun_quarter note_88568.png'
+import minim from '../../images/noun_Half Note_88569.png'
 
 // Styled Components
 

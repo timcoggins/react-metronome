@@ -8,7 +8,7 @@ import axios from "axios";
 import { useState, useEffect } from 'react'
 import { nanoid } from "nanoid";
 import { Link } from 'react-router-dom';
-import { Container, Expand, Heading, Controls } from './atoms/SideBar'
+import { Container, Expand, Heading, Controls } from '../atoms/SideBar'
 
 /**
  * Patterns Component

@@ -7,7 +7,7 @@
 
 import { nanoid } from "nanoid";
 import { useState, useEffect } from 'react'
-import { Container, Expand, Heading, Controls } from './atoms/SideBar'
+import { Container, Expand, Heading, Controls } from '../atoms/SideBar'
 import axios from "axios";
 
 

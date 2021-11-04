@@ -6,9 +6,9 @@
 // Imports
 
 import {useState} from 'react'
-import { Container, Site, Logo, Controls, Button, SliderContainer } from './atoms/TopBar'
+import { Container, Site, Logo, Controls, Button, SliderContainer } from '../atoms/TopBar'
 import * as Tone from "tone";
-import logoImage from '../images/music.svg'
+import logoImage from '../../images/music.svg'
 
 /**
  * TransportControls Componenet

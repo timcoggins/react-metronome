@@ -10,7 +10,7 @@ import { SliderContainer} from "./atoms/TopBar";
 import { useState } from "react";
 import * as Tone from "tone";
 import {Button} from "./atoms/TopBar";
-import droneList from "../data/droneList";
+import droneList from "../assets/data/droneList";
 
 
 // Globals

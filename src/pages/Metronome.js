@@ -4,18 +4,18 @@
  */
 
 // Imports
-import { Container, SideBar } from "./atoms/MainWindow";
+import { Container, SideBar } from "../components/atoms/MainWindow";
 import { useState } from "react";
 import * as Tone from "tone";
-import patternList from "../data/patternList";
+import patternList from "../assets/data/patternList";
 
-import StepGrid from "./StepGrid";
-import StepEditor from "./StepEditor";
-import TransportControls from './TransportControls'
-import SoundOptions from "./SoundOptions";
-import Notes from './Notes'
-import Drone from "./Drone";
-import Patterns from "./Patterns";
+import StepGrid from "../components/StepGrid";
+import StepEditor from "../components/StepEditor";
+import TransportControls from '../components/TransportControls'
+import SoundOptions from "../components/SoundOptions";
+import Notes from '../components/Notes'
+import Drone from "../components/Drone";
+import Patterns from "../components/Patterns";
 
 
 // Globals

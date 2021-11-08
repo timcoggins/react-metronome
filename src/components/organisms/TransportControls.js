@@ -4,17 +4,18 @@
  */
 
 // Imports
-
 import { useState, useEffect } from 'react'
-import { Controls, Button, SliderContainer } from './atoms/TopBar'
+import TransportContainer from "../atoms/TransportContainer";
+import TransportButton from "../atoms/TransportButton";
+import SliderContainer from "../atoms/SliderContainer";
 import * as Tone from "tone";
+import Input from "../atoms/Input";
 
 /**
- * TransportControls Componenet
+ * TransportControls Component
  * @param props
  * @returns {JSX.Element}
  */
-
 const TransportControls = (props) => {
 
     // State Variables
@@ -46,26 +47,26 @@ const TransportControls = (props) => {
 
     return (
         <>
-            <Controls>
-                <Button onClick={props.playStopButtonHandler}>
+            <TransportContainer>
+                <TransportButton onClick={props.playStopButtonHandler}>
                     <span
                         className="material-icons"
                         style={isPlaying === true ? {color: 'black'} : {color: 'green'}}
                     >
                         {isPlaying === true ? 'stop' : 'play_arrow'}
                     </span>
-                </Button>
-            </Controls>
-            <Controls>
+                </TransportButton>
+            </TransportContainer>
+            <TransportContainer>
                 <SliderContainer>
                     {tempo} bpm
-                    <input type="range" min="10" max="350" value={tempo} onChange={tempoHandler} />
+                    <Input type="range" min="10" max="350" value={tempo} onChange={tempoHandler} />
                 </SliderContainer>
                 <SliderContainer>
                     {volume}db
-                    <input type="range" min="-40" max="0" value={volume} onChange={volumeHandler} />
+                    <Input type="range" min="-40" max="0" value={volume} onChange={volumeHandler} />
                 </SliderContainer>
-            </Controls>
+            </TransportContainer>
         </>
     )
 }

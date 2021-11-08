@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Metronome from './pages/Metronome'
+import Login from './pages/Login'
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -13,10 +15,10 @@ function App() {
                     <Metronome />
                 </Route>
                 <Route exact path={'/login'}>
-                    <h1>Login</h1>
+                    <Login />
                 </Route>
                 <Route exact path={'/register'}>
-                    <h1>Register</h1>
+                    <Register />
                 </Route>
             </Switch>
         </div>

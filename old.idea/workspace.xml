@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="703e8071-555c-4853-bf52-f002a05d4f90" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Block.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Block.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/StepBlock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/StepBlock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Metronome.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Metronome.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SoundOptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SoundOptions.js" afterDir="false" />
     </list>

@@ -4,21 +4,26 @@
  */
 
 // Imports
+import axios from 'axios'
 import * as Tone from "tone";
 import StepEngine from "../utils/StepEngine";
 import { useParams } from 'react-router-dom'
-import { useState, useEffect } from "react";
 import { useQuery } from 'react-query'
+import { useState, useEffect } from "react";
 import patternList from "../assets/data/patternList";
-import { Container, SideBar } from "../components/atoms/MainWindow";
 
-import NavBar from "../components/NavBar";
-import StepGrid from "../components/StepGrid";
-import StepEditor from "../components/StepEditor";
-import SoundOptions from "../components/SoundOptions";
-import Patterns from "../components/Patterns";
-import Drone from "../components/Drone";
-import Notes from '../components/Notes'
+import UserMessage from '../components/molecules/UserMessage'
+
+import MainWindow from "../components/atoms/MainWindow";
+import SideBar from "../components/atoms/SideBar";
+import NavBar from "../components/molecules/NavBar";
+import StepGrid from "../components/organisms/StepGrid";
+import StepEditor from "../components/organisms/StepEditor";
+import SoundOptions from "../components/organisms/SoundOptions";
+import Patterns from "../components/organisms/Patterns";
+import Drone from "../components/organisms/Drone";
+import Notes from '../components/organisms/Notes'
+import TransportControls from "../components/organisms/TransportControls";
 
 // Globals
 const initialData = patternList[0].data // Load the initial pattern
@@ -35,11 +40,27 @@ const Metronome = () => {
 
     // Get the pattern ID from the router params
     const { id } = useParams();
-    const { isLoading, isError, data, error } = useQuery('fetchPattern', fetchPattern(id))
-
-
 
     // TODO Axios request to get pattern data
+    const { isLoading, data, isError } = useQuery(
+        // query key: an array with a name and a variable used in the endpoint
+        ["Fetch Pattern"],
+        // note that we are importing an axios instance with base URL so we only need to change the endpoint
+        () => {
+            if(id === undefined) return axios.get(`http://localhost:80/patterns/2`)
+            return axios.get(`http://localhost:80/patterns/${id}`)
+        },
+        {
+            enabled: true, // this stops the query from running automatically
+            retry: 1,
+        }
+    );
+
+    // When the data arrives update the data in the application
+    useEffect(() => {
+        if(!isLoading && !isError) updateStepData(data.data.data)
+    }, [data, isLoading, isError])
+
 
     // State variable to hold the step data
     const [stepData, setStepData] = useState(initialData)
@@ -113,13 +134,18 @@ const Metronome = () => {
 
     // JSX
 
-    return(<>
-        <NavBar
-            tone={Tone}
-            playStopButtonHandler={playStopButtonHandler}
-            engine={engine}
-        />
-        <Container>
+    return (
+    <>
+        <NavBar>
+            <TransportControls
+                tone={Tone}
+                playStopButtonHandler={playStopButtonHandler}
+                engine={engine}
+            />
+        </NavBar>
+        { isLoading && <UserMessage title={'Loading'}>Please wait</UserMessage>}
+        { isError && <UserMessage title={'Error'}>Could not load pattern</UserMessage>}
+        { !isLoading && !isError && <MainWindow>
 
             <SideBar>
                 {stepSelected && <StepEditor
@@ -147,8 +173,9 @@ const Metronome = () => {
                 editStep={editStep}
                 addStep={addStep}
             />
-        </Container>
-    </>)
+        </MainWindow>}
+    </>
+    )
 }
 
 export default Metronome

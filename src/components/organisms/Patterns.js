@@ -4,22 +4,22 @@
  */
 
 // Imports
-
+import axios from "axios";
 import { useState, useEffect } from 'react'
 import {nanoid} from "nanoid";
-import axios from "axios";
-import { Container, Expand, Heading, Controls } from './atoms/SideBar'
+import SideBarItem from "../molecules/SideBarItem";
+import SideBarControls from "../atoms/SideBarControls";
+import Select from "../atoms/Select";
+import Button from "../atoms/Button"
 
 /**
  * Patterns Component
  * @returns {JSX.Element}
  */
-
 const Patterns = (props) => {
 
     // State variables
     const [patternList, setPatternList] = useState([])
-    const [display, setDisplay] = useState(false)
     const [selected, setSelect] = useState(0)
 
     /**
@@ -37,7 +37,7 @@ const Patterns = (props) => {
     /**
      * Axios post to save a pattern
      */
-    const saveHandler = () => {
+    //const saveHandler = () => {
 
         //const name = prompt('Name of the pattern')
         //const author = prompt('Author')
@@ -50,30 +50,22 @@ const Patterns = (props) => {
             .then(response => console.log(response))
             .catch(error => console.log(error));
         getPatternList();*/
-    }
+    //}
 
     // JSX
 
     return(
-        <Container>
-            <Heading onClick={() => setDisplay(!display)}>
-                <h3>Patterns</h3>
-                <Expand><span className="material-icons">
-                    {display === true ? 'expand_less' : 'expand_more'}
-                </span></Expand>
-            </Heading>
-            {display === true && <div>
-                <Controls>
-                    <select value={selected} onChange={(e) => setSelect(e.target.value)}>
-                        {patternList.length !== 0 && patternList.map((item, index) =>
-                            <option key={nanoid} value={index}>{item.name}</option>
-                        )}
-                    </select>
-                    <button onClick={() => props.updateStepData(patternList[selected].data)}>Load</button>
-                    {/*<button onClick={saveHandler}>Save</button>*/}
-                </Controls>
-             </div>}
-        </Container>
+        <SideBarItem title={'Patterns'}>
+            <SideBarControls>
+                <Select value={selected} onChange={(e) => setSelect(e.target.value)}>
+                    {patternList.length !== 0 && patternList.map((item, index) =>
+                        <option key={nanoid} value={index}>{item.name}</option>
+                    )}
+                </Select>
+                <Button onClick={() => props.updateStepData(patternList[selected].data)}>Load</Button>
+                {/*<button onClick={saveHandler}>Save</button>*/}
+            </SideBarControls>
+         </SideBarItem>
     );
 }
 

@@ -9,7 +9,7 @@ class StepEngine {
      * @param data array of steps
      */
     constructor(data) {
-
+        // TODO check to see if the samples are loaded before playing
         // TODO Refactor the names of the counters, oscilater names like reset and alt need to be standardised
         // Data
         this.data = data;

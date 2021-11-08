@@ -1,6 +1,11 @@
+/**
+ * Theme.js
+ * Provides the theme for the app
+ */
 import React from "react";
 import { ThemeProvider } from "styled-components";
 
+// Styles
 const theme = {
     colors: {
         powderWhite: "#FFFDF9",
@@ -9,10 +14,19 @@ const theme = {
         onyx: "#36313D",
         middleGreen: "#224422",
         darkGreen: "#113311",
-        sidebarBackground: "#FFFFFF",
-        expandBackground: "#dcdcdc"
+
+        headingColor: "#000000",
+        paragraphColor: "#313131",
+
+        // Backgrounds
+        contentBackground: "#FFFFFF",
+        expandBackground: "#dcdcdc",
+        buttonColor: "#313131",
+        buttonBackground: "#dcdcdc",
+        borderColor: "#886F68"
+
     },
-    fonts: ["sans-serif", "Roboto"],
+    fonts: ["sans-serif", "Poppins"],
     fontSizes: {
         small: "1em",
         medium: "2em",

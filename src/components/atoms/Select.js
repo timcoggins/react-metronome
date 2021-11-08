@@ -8,7 +8,6 @@ import styled from 'styled-components'
 const Select = styled.select`
     border-radius: 5px;
     padding: 2px;
-    width: 160px;
 `
 
 export default Select;

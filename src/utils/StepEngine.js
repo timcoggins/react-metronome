@@ -1,7 +1,9 @@
 /**
+ * StepEngine.js
  * Main class for the metronome functionality, counts, steps and plays each sound
  */
 import * as Tone from "tone";
+
 
 class StepEngine {
     /**
@@ -31,7 +33,7 @@ class StepEngine {
     /**
      * Is called on each step and provides the counting and playback
      * @param time
-      */
+     */
     step(time) {
 
         // See whether we play a step
@@ -73,10 +75,22 @@ class StepEngine {
      * @param alt
      * @param reset
      */
-    changeSound = (primary, alt, reset) => {
+    updateSounds = (primary, alt, reset) => {
+
+
+
+
         this.osc.load(`./${primary}`)
         this.osc2.load(`./${alt}`)
         this.osc3.load(`./${reset}`)
+    }
+
+    /**
+     * Check if we are ready to begin playback
+     */
+    checkIfReady = () => {
+
+
     }
 
     /**
@@ -86,12 +100,15 @@ class StepEngine {
     updateVolume = (volume) => {this.vol.volume.value = volume}
 
     /**
-     * Mutes the alternate sound
+     * Mutes the sounds
       * @param muted
      */
-    // TODO make this for the 3 sounds and standardise the method!
-    muteAltSound = (muted) => this.osc2.mute = muted;
-    toggleResetSound = () => this.useReset = !this.useReset;
+    muteDownbeat = (muted) => this.osc.mute = muted;
+    muteUpbeat = (muted) => this.osc2.mute = muted;
+    muteRestart = (muted) => {
+        this.useReset = !muted;
+        this.osc3.mute = muted;
+    }
 }
 
 export default StepEngine

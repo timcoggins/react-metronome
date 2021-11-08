@@ -99,6 +99,8 @@ const Metronome = () => {
         }
     }
 
+    //console.log(engine.isPlaying)
+
     /**
      * Opens a step in the edit window
      * @param id
@@ -154,9 +156,7 @@ const Metronome = () => {
                     addStep={addStep}
                     removeStep={removeStep}/>}
                 <SoundOptions
-                    changeSound={engine.changeSound}
-                    muteAltSound={engine.muteAltSound}
-                    toggleResetSound={engine.toggleResetSound}
+                    engine={engine}
                 />
                 <Patterns
                     stepData={stepData}
@@ -165,7 +165,6 @@ const Metronome = () => {
                 <Drone/>
                 <Notes />
             </SideBar>
-
             <StepGrid
                 stepData = {stepData}
                 selectedStep={stepSelected}

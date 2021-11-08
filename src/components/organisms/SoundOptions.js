@@ -10,7 +10,6 @@ import { useState, useEffect } from 'react'
 import SideBarItem from "../molecules/SideBarItem";
 import SideBarControls from "../atoms/SideBarControls";
 import Select from "../atoms/Select";
-import P from "../atoms/P"
 import Input from "../atoms/Input";
 
 /**
@@ -20,15 +19,17 @@ import Input from "../atoms/Input";
  */
 const SoundOptions = (props) => {
 
-    // State variables for the dropdown selectors
-    const [mainSound, setMainSound] = useState('samples/BD CR78 MPC60 05.wav.wav')
-    const [altSound, setAltSound] = useState('samples/Clave CR78 MPC60 10.wav')
-    const [resetSound, setResetSound] = useState('samples/CH CR78 B MPC60 07.wav')
     const [sampleList, setSampleList] = useState([])
 
+    // State variables for the dropdown selectors
+    const [downbeatSound, setDownbeatSound] = useState('samples/BD CR78 MPC60 05.wav.wav')
+    const [upbeatSound, setUpbeatSound] = useState('samples/Clave CR78 MPC60 10.wav')
+    const [restartSound, setRestartSound] = useState('samples/CH CR78 B MPC60 07.wav')
+
     // State variables for the checkboxes
-    const [toggleMuteAlt, setToggleMuteAlt] = useState(true);
-    const [toggleReset, setToggleReset] = useState(true);
+    const [toggleDownbeat, setToggleDownbeat] = useState(true);
+    const [toggleUpbeat, setToggleUpbeat] = useState(true);
+    const [toggleRestart, setToggleRestart] = useState(true);
 
     /**
      * Axios request to get the samples
@@ -43,17 +44,19 @@ const SoundOptions = (props) => {
     // Get the list of samples when the component mounts
     useEffect(() => getSampleList(), [])
 
+
+
     // Update the sounds if the user changed something
     // eslint-disable-next-line
-    useEffect(() => props.changeSound(mainSound, altSound, resetSound), [mainSound, altSound, resetSound]);
+    useEffect(() => props.engine.updateSounds(downbeatSound, upbeatSound, restartSound), [downbeatSound, upbeatSound, restartSound]);
 
-    // Update the state of the mute alternate sound if the toggles
+    // Update the mute states in the step engine when a change is made
     // eslint-disable-next-line
-    useEffect(() => props.muteAltSound(!toggleMuteAlt), [toggleMuteAlt]);
-
-    // Update the state of the reset sound if the user toggles
+    useEffect(() => props.engine.muteDownbeat(!toggleDownbeat), [toggleDownbeat]);
     // eslint-disable-next-line
-    useEffect(() => props.toggleResetSound(toggleReset), [toggleReset]);
+    useEffect(() => props.engine.muteUpbeat(!toggleUpbeat), [toggleUpbeat]);
+    // eslint-disable-next-line
+    useEffect(() => props.engine.muteRestart(!toggleRestart), [toggleRestart]);
 
 
     // JSX Element
@@ -62,28 +65,35 @@ const SoundOptions = (props) => {
 
             {/* UI Element for choosing the main click sound */}
             <SideBarControls>
-                <P>Main Sound:</P>
-                <Select value={mainSound} onChange={(e) => setMainSound(e.target.value)}>
+                Downbeat sound:
+            </SideBarControls>
+            <SideBarControls>
+                <Select value={downbeatSound} disabled={!toggleDownbeat} onChange={(e) => setDownbeatSound(e.target.value)}>
                     {sampleList.length !== 0 && sampleList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
                 </Select>
+                <Input type='checkbox' checked={toggleDownbeat} onChange={() => setToggleDownbeat(!toggleDownbeat)}/>
             </SideBarControls>
 
             {/* UI Element for choosing the alternate click sound */}
             <SideBarControls>
-                <P>Alt Sound:</P>
-                <Input type='checkbox' checked={toggleMuteAlt} onChange={() => setToggleMuteAlt(!toggleMuteAlt)}/>
-                <Select value={altSound} disabled={!toggleMuteAlt} onChange={(e) => setAltSound(e.target.value)}>
+                Upbeat sound:
+            </SideBarControls>
+            <SideBarControls>
+                <Select value={upbeatSound} disabled={ !toggleUpbeat } onChange={(e) => setUpbeatSound(e.target.value)}>
                     {sampleList.length !== 0 && sampleList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
                 </Select>
+                <Input type='checkbox' checked={toggleUpbeat} onChange={() => setToggleUpbeat(!toggleUpbeat)}/>
             </SideBarControls>
 
             {/* UI Element for choosing the reset click sound */}
             <SideBarControls>
-                <P>Reset Sound:</P>
-                <Input type='checkbox' checked={toggleReset} onChange={() => setToggleReset(!toggleReset)}/>
-                <Select value={resetSound} disabled={!toggleReset} onChange={(e) => setResetSound(e.target.value)}>
+                Restart sound:
+            </SideBarControls>
+            <SideBarControls>
+                <Select value={restartSound} disabled={!toggleRestart} onChange={(e) => setRestartSound(e.target.value)}>
                     {sampleList.length !== 0 && sampleList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
                 </Select>
+                <Input type='checkbox' checked={toggleRestart} onChange={() => setToggleRestart(!toggleRestart)}/>
             </SideBarControls>
         </SideBarItem>
     )

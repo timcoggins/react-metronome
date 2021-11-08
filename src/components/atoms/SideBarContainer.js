@@ -10,9 +10,10 @@ const SideBarContainer = styled.div`
     padding: 0 15px;
     margin: 0;
     
-    border-bottom: #886F68 1px solid;
-    border-right: #886F68 1px solid;
-    background: white;
+    border-bottom: ${props => props.theme.colors.borderColor} 1px solid;
+    border-right: ${props => props.theme.colors.borderColor} 1px solid;
+  
+    background: ${props => props.theme.colors.contentBackground};
     
     text-align: left;
 

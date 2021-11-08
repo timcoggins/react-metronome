@@ -12,6 +12,9 @@ const TransportButton = styled.button`
     display: grid;
     place-items: center;
     cursor: pointer;
+    color: ${props => props.theme.colors.buttonColor};
+    background: ${props => props.theme.colors.buttonBackground};
+    border: 0;
 `
 
 export default TransportButton;

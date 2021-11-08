@@ -6,12 +6,12 @@ import styled from 'styled-components'
 
 // Styles
 const NavBarContainer = styled.div`
-    background: white;
+    background: ${props => props.theme.colors.contentBackground};
     margin: 0;
     display: flex;
     place-content: space-between;
     align-items: center;
-    border-bottom: #886F68 1px solid;
+    border-bottom: ${props => props.theme.colors.borderColor} 1px solid;
   
     // Styles for the application title
     h1 {

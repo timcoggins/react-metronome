@@ -5,7 +5,7 @@ import App from './App';
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 
-import GlobalStyle from "./styles/globalStyles";
+import GlobalStyle from "./styles/GlobalStyles";
 import Theme from './styles/Theme'
 
 // Create a client

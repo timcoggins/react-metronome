@@ -70,7 +70,6 @@ const Drone = () => {
     return(
         <SideBarItem title={'Drones'}>
             <SideBarControls>
-                <P>Key</P>
                 <Select onChange={droneHandler}>
                     {droneList.map(item => <option value={item.file}>{item.name}</option>)}
                 </Select>

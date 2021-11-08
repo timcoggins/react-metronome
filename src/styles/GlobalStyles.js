@@ -1,6 +1,10 @@
-// globalStyles.js
+/**
+ * GlobalStyles.js
+ * Sets the Global styles for the app
+ */
 import { createGlobalStyle } from 'styled-components';
 
+// Styles
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;

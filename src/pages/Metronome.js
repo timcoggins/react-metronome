@@ -4,101 +4,55 @@
  */
 
 // Imports
-import { Container, SideBar } from "../components/atoms/MainWindow";
-import { useState } from "react";
 import * as Tone from "tone";
+import StepEngine from "../utils/StepEngine";
+import { useParams } from 'react-router-dom'
+import { useState, useEffect } from "react";
+import { useQuery } from 'react-query'
 import patternList from "../assets/data/patternList";
+import { Container, SideBar } from "../components/atoms/MainWindow";
 
+import NavBar from "../components/NavBar";
 import StepGrid from "../components/StepGrid";
 import StepEditor from "../components/StepEditor";
-import TransportControls from '../components/TransportControls'
 import SoundOptions from "../components/SoundOptions";
-import Notes from '../components/Notes'
-import Drone from "../components/Drone";
 import Patterns from "../components/Patterns";
-
+import Drone from "../components/Drone";
+import Notes from '../components/Notes'
 
 // Globals
 const initialData = patternList[0].data // Load the initial pattern
 
-// Setup ToneJS volume node and sample players
-const vol = new Tone.Volume().toDestination();
-const osc = new Tone.Player("./samples/BD CR78 MPC60 05.wav").connect(vol);
-const osc2 = new Tone.Player("./samples/Clave CR78 MPC60 10.wav").connect(vol);
-const osc3 = new Tone.Player("./samples/CLICKHIGH.wav").connect(vol);
-
-let useReset = true;
-
-// Counters for Steps
-let currentStep = 0;
-let currentLargeStep = 0
-let currentSubStep = 0;
-
+// Create the metronome engine
+const engine = new StepEngine(initialData);
 
 /**
  * Metronome Component
  * @returns {JSX.Element}
  * @constructor
  */
-
 const Metronome = () => {
+
+    // Get the pattern ID from the router params
+    const { id } = useParams();
+    const { isLoading, isError, data, error } = useQuery('fetchPattern', fetchPattern(id))
+
+
+
+    // TODO Axios request to get pattern data
 
     // State variable to hold the step data
     const [stepData, setStepData] = useState(initialData)
     const [stepSelected, setStepSelected] = useState(stepData[0])
-    const [activeStep, setActiveStep] = useState(0)
-    const [isPlaying, setIsPlaying] = useState(false);
+    const [stepActive, setStepActive] = useState(0)
 
     /**
-     * Manages the sequencing of audio events
-     * @param time
-     * @constructor
+     * Update Step Data
      */
-    const Step = (time) => {
-
-        // Play a sound or something
-        if(!stepData[currentStep].silent) {
-            if(currentStep === 0 && currentLargeStep === 0 && currentSubStep === 0 && useReset === true) osc3.start(time).stop(time + 0.2);
-            else if (currentLargeStep === 0 && currentSubStep === 0) osc.start(time).stop(time + 0.2);
-            else if (currentSubStep === 0) osc2.start(time).stop(time + 0.2);
-        }
-
-        // Increment the step counters!
-        if (currentSubStep < stepData[currentStep].base - 1) {
-            currentSubStep += 1;
-        } else {
-            currentSubStep = 0;
-            currentLargeStep += 1;
-            if (currentLargeStep >= stepData[currentStep].length) {
-                currentLargeStep = 0;
-                if(currentStep >= stepData.length - 1) {
-                    currentStep = 0
-                } else {
-                    currentStep += 1;
-                }
-                setActiveStep(currentStep)
-            }
-        }
+    const updateStepData = (newStepData) => {
+        setStepData(newStepData);
+        engine.data = newStepData;
     }
-
-    /**
-     * Update the click sounds
-     * @param main
-     * @param alt
-     * @param reset
-     */
-    const changeSound = (main, alt, reset) => {
-        osc.load(`./${main}`)
-        osc2.load(`./${alt}`)
-        osc3.load(`./${reset}`)
-    }
-
-    /**
-     * Mutes the sound of the alternate sample
-     * @param muted
-     */
-    const muteAltSound = (muted) => osc2.mute = muted;
-    const toggleResetSound = (muted) => useReset = muted;
 
     /**
      * Handles the play button
@@ -106,24 +60,21 @@ const Metronome = () => {
     const playStopButtonHandler = () => {
         if(Tone.Transport.state === 'stopped') {
             // Reset back to zero
-            currentStep = 0;
-            currentLargeStep = 0;
-            currentSubStep = 0;
-            setActiveStep(currentStep)
+            engine.setToZero()
+            setStepActive(0)
             // Schedules the clock
-            Tone.Transport.scheduleRepeat((time) => Step(time), "16n");
+            Tone.Transport.scheduleRepeat((time) => {
+                engine.step(time)
+                setStepActive(engine.currentStep)
+            }, "16n");
             // Start ToneJS
             Tone.start()
                 .then(() => Tone.Transport.start())
-            setIsPlaying(true)
-            return;
-        }
-
-        if(Tone.Transport.state === 'started') {
+             engine.isPlaying = true;
+        } else if(Tone.Transport.state === 'started') {
             Tone.Transport.cancel()
             Tone.Transport.stop();
-            setIsPlaying(false)
-            return;
+            engine.isPlaying = false;
         }
     }
 
@@ -140,13 +91,16 @@ const Metronome = () => {
      * Updates a step from the data in the edit window
      * @param step
      */
-    const updateStep = (step) => setStepData(stepData.map(item => step.id === item.id ? step : item))
+    const updateStep = (step) => {
+        const updatedData = stepData.map(item => step.id === item.id ? step : item)
+        updateStepData(updatedData)
+    }
 
     /**
      * Adds a new step with the data from the edit window
      * @param step
      */
-    const addStep = (step) => setStepData([...stepData, step])
+    const addStep = (step) => updateStepData([...stepData, step])
 
     /**
      * Removes a step based on the id, reset the step edit back to the first step
@@ -157,41 +111,40 @@ const Metronome = () => {
         setStepSelected(stepData[0])
     }
 
-    /**
-     * Updates the volume
-     * @param volume
-     */
-    const updateVolume = (volume) => {vol.volume.value = volume}
-
     // JSX
 
     return(<>
-        <TransportControls
+        <NavBar
             tone={Tone}
             playStopButtonHandler={playStopButtonHandler}
-            isPlaying={isPlaying}
-            updateVolume={updateVolume}
+            engine={engine}
         />
         <Container>
+
             <SideBar>
-                {stepSelected && <StepEditor step={stepSelected} updateStep={updateStep} addStep={addStep} removeStep={removeStep}/>}
+                {stepSelected && <StepEditor
+                    step={stepSelected}
+                    updateStep={updateStep}
+                    addStep={addStep}
+                    removeStep={removeStep}/>}
                 <SoundOptions
-                    changeSound={changeSound}
-                    muteAltSound={muteAltSound}
-                    toggleResetSound={toggleResetSound}
+                    changeSound={engine.changeSound}
+                    muteAltSound={engine.muteAltSound}
+                    toggleResetSound={engine.toggleResetSound}
                 />
                 <Patterns
                     stepData={stepData}
-                    setStepData={setStepData}
+                    updateStepData={updateStepData}
                 />
                 <Drone/>
                 <Notes />
             </SideBar>
+
             <StepGrid
                 stepData = {stepData}
-                editStep={editStep}
-                currentStep={activeStep}
                 selectedStep={stepSelected}
+                currentStep={stepActive}
+                editStep={editStep}
                 addStep={addStep}
             />
         </Container>

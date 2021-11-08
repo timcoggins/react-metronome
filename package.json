@@ -10,6 +10,8 @@
     "nanoid": "^3.1.30",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-query": "^3.32.1",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "styled-components": "^5.3.3",
     "tone": "^14.7.77",

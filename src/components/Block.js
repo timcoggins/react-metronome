@@ -57,7 +57,7 @@ const StyledBlock = styled.div`
 
 const Note = styled.img`
     height: 40px;
-    width: 40px
+    width: 40px;
 `
 
 /**

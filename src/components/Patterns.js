@@ -17,12 +17,10 @@ import { Container, Expand, Heading, Controls } from './atoms/SideBar'
 
 const Patterns = (props) => {
 
+    // State variables
     const [patternList, setPatternList] = useState([])
     const [display, setDisplay] = useState(false)
     const [selected, setSelect] = useState(0)
-
-
-
 
     /**
      * Axios request to get the patterns
@@ -36,23 +34,22 @@ const Patterns = (props) => {
 
     useEffect(() => getPatternList(), [])
 
-
     /**
      * Axios post to save a pattern
      */
     const saveHandler = () => {
 
-        const name = prompt('Name of the pattern')
-        const author = prompt('Author')
+        //const name = prompt('Name of the pattern')
+        //const author = prompt('Author')
 
-        axios.post('http://localhost/patterns', {
+        /*axios.post('http://localhost/patterns', {
             name: name,
             author: author,
             data: props.stepData
         })
             .then(response => console.log(response))
             .catch(error => console.log(error));
-        getPatternList();
+        getPatternList();*/
     }
 
     // JSX
@@ -72,8 +69,8 @@ const Patterns = (props) => {
                             <option key={nanoid} value={index}>{item.name}</option>
                         )}
                     </select>
-                    <button onClick={() => props.setStepData(patternList[selected].data)}>Load</button>
-                    <button onClick={saveHandler}>Save</button>
+                    <button onClick={() => props.updateStepData(patternList[selected].data)}>Load</button>
+                    {/*<button onClick={saveHandler}>Save</button>*/}
                 </Controls>
              </div>}
         </Container>

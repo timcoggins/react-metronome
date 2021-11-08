@@ -5,10 +5,10 @@
 
 // Imports
 
+import { nanoid } from 'nanoid'
 import styled from 'styled-components'
 import Block from "./Block";
 import AddStepBlock from "./AddStepBlock";
-import { nanoid } from 'nanoid'
 
 // Styles
 

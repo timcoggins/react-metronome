@@ -6,14 +6,18 @@ import styled, {css} from "styled-components";
 
 // Styles
 const Block = styled.div`
-    width: 70px;
-    height: 120px;
-    border-radius: 4px;
+    width: 150px;
+    //height: 120px;
+    //border-radius: 4px;
     border: 1px solid rgba(209, 213, 219, 0.3);
+    margin: 0;
+  padding: 0;
     
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    place-content: center;
     opacity: 0.9;
     
     cursor: pointer;
@@ -27,14 +31,11 @@ const Block = styled.div`
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
     
     
-    &:hover {
-        background-color: ${props => props.theme.colors.blockBackgroundHover}
-        color: ${props => props.theme.colors.blockTextHover}
-    }
+
     
     ${props => props.disabled && css`
         background: ${props => props.theme.colors.blockBackgroundDisabled};
-        color: ${props => props.theme.colors.blockTextDisabled}
+        color: ${props => props.theme.colors.blockTextDisabled};
     `}
     
     ${props => props.primary && css`

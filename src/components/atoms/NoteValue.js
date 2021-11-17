@@ -7,8 +7,8 @@ import styled, {css} from "styled-components";
 
 // Styles
 const NoteValue =  styled.img`
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
     padding: 5px;
 

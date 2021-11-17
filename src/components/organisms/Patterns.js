@@ -27,7 +27,7 @@ const Patterns = (props) => {
      */
     const getPatternList = () => {
         // Make a request for a user with a given ID
-        axios.get('http://localhost/patterns')
+        axios.get('https://metronomic-backend.herokuapp.com/patterns')
             .then(response => setPatternList([...response.data]))
             .catch(error => console.log(error));
     }

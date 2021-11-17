@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 // Styles
 const P = styled.p`
-    color: ${props => props.theme.colors.paragraphColor};
+    color: ${props => props.theme.colors.contentText};
 `
 
 export default P;

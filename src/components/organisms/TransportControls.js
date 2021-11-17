@@ -26,6 +26,14 @@ const TransportControls = (props) => {
     useEffect(() => setIsPlaying(props.engine.isPlaying), [props.engine.isPlaying])
 
     /**
+     * Handles the play button
+     */
+    const playStopButtonHandler = () => {
+        if(props.engine.isPlaying) props.engine.stop()
+        else props.engine.start()
+    }
+
+    /**
      * Handles when the user changes the tempo slider
      * @param event
      */
@@ -48,7 +56,7 @@ const TransportControls = (props) => {
     return (
         <>
             <TransportContainer>
-                <TransportButton onClick={props.playStopButtonHandler}>
+                <TransportButton onClick={playStopButtonHandler}>
                     <span
                         className="material-icons"
                         style={isPlaying === true ? {color: 'black'} : {color: 'green'}}

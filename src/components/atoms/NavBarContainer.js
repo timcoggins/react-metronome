@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 // Styles
 const NavBarContainer = styled.div`
-    background: ${props => props.theme.colors.contentBackground};
+    background: ${props => props.theme.colors.navbarBackground};
     margin: 0;
     display: flex;
     place-content: space-between;

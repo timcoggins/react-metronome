@@ -7,9 +7,10 @@ import styled from 'styled-components'
 // Styles
 const Button = styled.button`
     background: ${props => props.theme.colors.buttonBackground};
-    color: ${props => props.theme.colors.buttonColor};
-    border: 0;
-    padding: 5px;
+    color: ${props => props.theme.colors.buttonText};
+    border: 1px ${props => props.theme.colors.borderColor} solid;
+    padding: 6px;
+    border-radius: 4px;
 `
 
 export default Button;

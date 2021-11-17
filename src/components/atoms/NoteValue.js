@@ -13,7 +13,7 @@ const NoteValue =  styled.img`
     padding: 5px;
 
     ${props => props.active && css`
-      background: #efefef;
+      background: ${props => props.theme.colors.activeNoteBackground};
     `}
 `;
 

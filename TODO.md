@@ -1,0 +1,6 @@
+- CRUD for patterns
+- User auth and signup
+- active step thing
+- theming
+- Redesign step editing UI
+- 

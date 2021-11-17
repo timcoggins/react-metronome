@@ -8,7 +8,7 @@ import NavBarSiteContainer from "../atoms/NavBarSiteContainer";
 import NavBarLogo from "../atoms/NavBarLogo";
 import H1 from "../atoms/H1";
 
-import logoImage from "../../assets/images/music.svg";
+import logoImage from "../../assets/images/musicwhite.svg";
 
 const NavBar = (props) => {
 

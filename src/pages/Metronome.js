@@ -9,7 +9,7 @@ import * as Tone from "tone";
 import StepEngine from "../utils/StepEngine";
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import patternList from "../assets/data/patternList";
 
 import UserMessage from '../components/molecules/UserMessage'
@@ -47,8 +47,8 @@ const Metronome = () => {
         ["Fetch Pattern"],
         // note that we are importing an axios instance with base URL so we only need to change the endpoint
         () => {
-            if(id === undefined) return axios.get(`http://localhost:80/patterns/2`)
-            return axios.get(`http://localhost:80/patterns/${id}`)
+            if(id === undefined) return axios.get(`https://metronomic-backend.herokuapp.com/patterns/1`)
+            return axios.get(`https://metronomic-backend.herokuapp.com/patterns/${id}`)
         },
         {
             enabled: true, // this stops the query from running automatically
@@ -67,6 +67,7 @@ const Metronome = () => {
     const [stepSelected, setStepSelected] = useState(stepData[0])
     const [stepActive, setStepActive] = useState(0)
 
+
     /**
      * Update Step Data
      */
@@ -74,32 +75,6 @@ const Metronome = () => {
         setStepData(newStepData);
         engine.data = newStepData;
     }
-
-    /**
-     * Handles the play button
-     */
-    const playStopButtonHandler = () => {
-        if(Tone.Transport.state === 'stopped') {
-            // Reset back to zero
-            engine.setToZero()
-            setStepActive(0)
-            // Schedules the clock
-            Tone.Transport.scheduleRepeat((time) => {
-                engine.step(time)
-                setStepActive(engine.currentStep)
-            }, "16n");
-            // Start ToneJS
-            Tone.start()
-                .then(() => Tone.Transport.start())
-             engine.isPlaying = true;
-        } else if(Tone.Transport.state === 'started') {
-            Tone.Transport.cancel()
-            Tone.Transport.stop();
-            engine.isPlaying = false;
-        }
-    }
-
-    //console.log(engine.isPlaying)
 
     /**
      * Opens a step in the edit window
@@ -141,7 +116,6 @@ const Metronome = () => {
         <NavBar>
             <TransportControls
                 tone={Tone}
-                playStopButtonHandler={playStopButtonHandler}
                 engine={engine}
             />
         </NavBar>
@@ -171,6 +145,7 @@ const Metronome = () => {
                 currentStep={stepActive}
                 editStep={editStep}
                 addStep={addStep}
+                activeStep={engine.currentStep}
             />
         </MainWindow>}
     </>

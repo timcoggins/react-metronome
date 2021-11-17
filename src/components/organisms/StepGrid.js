@@ -22,7 +22,7 @@ const StepGrid = (props) => {
         <BlockContainer>
             {/* Loop through and a display a block for each step*/}
             {props.stepData.map((item, index) =>
-                <StepBlock key={nanoid()} value={item} editStep={props.editStep} currentStep={props.currentStep} index={index} selectedStep={props.selectedStep}/>
+                <StepBlock key={nanoid()} value={item} editStep={props.editStep} currentStep={props.currentStep} index={index} selectedStep={props.selectedStep} activeStep={props.activeStep}/>
             )}
             <StepBlockAdd addStep={props.addStep}/>
         </BlockContainer>

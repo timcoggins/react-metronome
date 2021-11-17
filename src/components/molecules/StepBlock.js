@@ -4,7 +4,7 @@
  */
 
 // Import
-
+import { useState, useEffect } from 'react'
 import Heading2 from "../atoms/H2";
 import Note from "../atoms/Note";
 import Block from "../atoms/Block";
@@ -22,6 +22,8 @@ import minim from '../../assets/images/noun_Half Note_88569.png'
 
 const StepBlock = (props) => {
 
+    const [active, setActive] = useState(0)
+
     /**
      * Converts the numeric base number to the image location
      * @param noteType
@@ -34,12 +36,14 @@ const StepBlock = (props) => {
         if(noteType === 1) return semiquaver;
     }
 
+    useEffect(() => setActive(props.activeStep), [props.activeStep])
+
     // JSX
 
     return(
         <Block
             primary={props.value.id === props.selectedStep.id}
-            active={props.index === props.currentStep}
+            active={props.index === active}
             onClick={() => props.editStep(props.value.id)}
             disabled={props.value.silent}
         >

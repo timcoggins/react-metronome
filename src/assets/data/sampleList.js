@@ -1,5 +1,4 @@
 
-/*
 const samples = [
     {
         name:'CR78 Rim',
@@ -58,7 +57,7 @@ const samples = [
         file: 'samples/Tight Kick 1.wav'
     }
 ];
-*/
 
 
-export { getSampleList };
+
+export default samples;

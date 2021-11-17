@@ -3,9 +3,7 @@ import patternList from "../assets/data/patternList";
 
 const initialData = patternList[0].data // Load the initial pattern
 
-const StepContext = createContext({
-
-})
+const StepContext = createContext()
 
 export default StepContext
 

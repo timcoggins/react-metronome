@@ -6,8 +6,8 @@ import styled from 'styled-components'
 
 // Styles
 const Note = styled.img`
-    height: 40px;
-    width: 40px;
+    height: 60px;
+    width: 60px;
 `
 
 export default Note;

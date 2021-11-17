@@ -4,13 +4,16 @@
  */
 
 // Imports
-import axios from "axios";
+
 import { nanoid } from "nanoid";
 import { useState, useEffect } from 'react'
 import SideBarItem from "../molecules/SideBarItem";
 import SideBarControls from "../atoms/SideBarControls";
 import Select from "../atoms/Select";
 import Input from "../atoms/Input";
+import P from "../atoms/P"
+
+import samples from '../../assets/data/sampleList'
 
 /**
  * Sound Options Component
@@ -34,15 +37,15 @@ const SoundOptions = (props) => {
     /**
      * Axios request to get the samples
      */
-    const getSampleList = () => {
-        // Make a request for a user with a given ID
-        axios.get('http://localhost/samples')
-            .then(response => setSampleList([...response.data]))
-            .catch(error => console.log(error));
-    }
-
-    // Get the list of samples when the component mounts
-    useEffect(() => getSampleList(), [])
+    // const getSampleList = () => {
+    //     // Make a request for a user with a given ID
+    //     axios.get('http://localhost/samples')
+    //         .then(response => setSampleList([...response.data]))
+    //         .catch(error => console.log(error));
+    // }
+    //
+    // // Get the list of samples when the component mounts
+    // useEffect(() => getSampleList(), [])
 
 
 
@@ -65,33 +68,33 @@ const SoundOptions = (props) => {
 
             {/* UI Element for choosing the main click sound */}
             <SideBarControls>
-                Downbeat sound:
+                <P>Downbeat sound:</P>
             </SideBarControls>
             <SideBarControls>
                 <Select value={downbeatSound} disabled={!toggleDownbeat} onChange={(e) => setDownbeatSound(e.target.value)}>
-                    {sampleList.length !== 0 && sampleList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
+                    {samples.length !== 0 && samples.map(item => <option key={() => nanoid()} value={item.file}>{item.name}</option>)}
                 </Select>
                 <Input type='checkbox' checked={toggleDownbeat} onChange={() => setToggleDownbeat(!toggleDownbeat)}/>
             </SideBarControls>
 
             {/* UI Element for choosing the alternate click sound */}
             <SideBarControls>
-                Upbeat sound:
+                <P>Upbeat sound:</P>
             </SideBarControls>
             <SideBarControls>
                 <Select value={upbeatSound} disabled={ !toggleUpbeat } onChange={(e) => setUpbeatSound(e.target.value)}>
-                    {sampleList.length !== 0 && sampleList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
+                    {samples.length !== 0 && samples.map(item => <option key={() => nanoid()} value={item.file}>{item.name}</option>)}
                 </Select>
                 <Input type='checkbox' checked={toggleUpbeat} onChange={() => setToggleUpbeat(!toggleUpbeat)}/>
             </SideBarControls>
 
             {/* UI Element for choosing the reset click sound */}
             <SideBarControls>
-                Restart sound:
+                <P>Restart sound:</P>
             </SideBarControls>
             <SideBarControls>
                 <Select value={restartSound} disabled={!toggleRestart} onChange={(e) => setRestartSound(e.target.value)}>
-                    {sampleList.length !== 0 && sampleList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
+                    {samples.length !== 0 && samples.map(item => <option key={() => nanoid()} value={item.file}>{item.name}</option>)}
                 </Select>
                 <Input type='checkbox' checked={toggleRestart} onChange={() => setToggleRestart(!toggleRestart)}/>
             </SideBarControls>

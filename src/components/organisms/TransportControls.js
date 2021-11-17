@@ -24,6 +24,7 @@ const TransportControls = (props) => {
 
     const [isPlaying, setIsPlaying] = useState(false)
     useEffect(() => setIsPlaying(props.engine.isPlaying), [props.engine.isPlaying])
+    useEffect(() => setTempo(parseInt(Tone.Transport.bpm.value)), [Tone.Transport.bpm.value])
 
     /**
      * Handles the play button

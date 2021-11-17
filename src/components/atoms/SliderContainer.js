@@ -10,6 +10,7 @@ const SliderContainer = styled.div`
     flex-direction: column;
     font-size: 12px;
     align-items: center;
+    color: ${props => props.theme.colors.contentText};
 `
 
 export default SliderContainer;

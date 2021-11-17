@@ -14,7 +14,7 @@ const TransportButton = styled.button`
     cursor: pointer;
     color: ${props => props.theme.colors.buttonColor};
     background: ${props => props.theme.colors.buttonBackground};
-    border: 0;
+    border: 1px ${props => props.theme.colors.borderColor} solid;
 `
 
 export default TransportButton;

@@ -48,7 +48,7 @@ const darkTheme = {
         buttonBackground: "#595959",
 
         selectText: "#ffffff",
-        selectBackground: "#595959",
+        selectBackground: "#313131",
 
         activeNoteBackground: "#949494",
 

@@ -21,6 +21,7 @@ import StepContext from "../../contexts/StepContext";
 const StepGrid = (props) => {
 
     const { stepData } = useContext(StepContext)
+
     // JSX
     return(
         <BlockContainer>

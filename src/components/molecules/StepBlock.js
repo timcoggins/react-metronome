@@ -4,19 +4,18 @@
  */
 
 // Import
-import { useState, useEffect } from 'react'
 import Note from "../atoms/Note";
 import Block from "../atoms/Block";
 import BlockButton from "../atoms/BlockButton"
-import Heading2 from "../atoms/H2";
+import Heading1 from "../atoms/H1";
 
 import { useContext } from "react";
 import StepContext from "../../contexts/StepContext";
 
-import quaver from '../../assets/images/noun_quaver_1688935.png'
-import semiquaver from '../../assets/images/noun_Sixteenth Note_88567.png'
-import crochet from '../../assets/images/noun_quarter note_88568.png'
-import minim from '../../assets/images/noun_Half Note_88569.png'
+import quaver from '../../assets/images/quaver.png'
+import semiquaver from '../../assets/images/semiquaver.png'
+import crochet from '../../assets/images/crotchet.png'
+import minim from '../../assets/images/minim.png'
 
 /**
  * StepBlock Component
@@ -26,41 +25,40 @@ import minim from '../../assets/images/noun_Half Note_88569.png'
 
 const StepBlock = (props) => {
 
-    const { stepData, setStepData } = useContext(StepContext)
-    const [active, setActive] = useState(0)
 
+    const { stepData, setStepData } = useContext(StepContext)
+
+    /**
+     * Changes the number of repetitions
+     */
     const changeRepetitions = () => {
         setStepData(stepData.map(item => {
             if (item.id === props.value.id) {
-                if (item.length < 8) {
-                    item.length += 1;
-                } else {
-                    item.length = 1;
-                }
+                if (item.length < 8) item.length += 1;
+                else item.length = 1;
             }
             return item
         }))
     }
 
+    /**
+     * Toggles the silence parameter for a step
+     */
     const changeSilence = () => {
         setStepData(stepData.map(item => {
-            if (item.id === props.value.id) {
-                item.silent = !item.silent
-            }
+            if (item.id === props.value.id) item.silent = !item.silent
             return item
         }))
     }
 
-    const deleteStep = () => {
-        setStepData(stepData.filter(item => {
-            if (item.id === props.value.id) {
-                return false
-            }
-            return true
-        }))
-    }
+    /**
+     * Deletes a Step
+     */
+    const deleteStep = () => setStepData(stepData.filter(item => item.id !== props.value.id))
 
-
+    /**
+     * Changes a duration value to the next division
+     */
     const changeDuration = () => {
         setStepData(stepData.map(item => {
             if (item.id === props.value.id) {
@@ -85,10 +83,7 @@ const StepBlock = (props) => {
         if(noteType === 1) return semiquaver;
     }
 
-    useEffect(() => setActive(props.activeStep), [props.activeStep])
-
     // JSX
-
     return(
         <Block
             //primary={props.value.id === props.selectedStep.id}
@@ -96,7 +91,7 @@ const StepBlock = (props) => {
             //onClick={() => props.editStep(props.value.id)}
             disabled={props.value.silent}
         >
-             <BlockButton onClick={changeRepetitions}><Heading2>{props.value.length}</Heading2></BlockButton>
+             <BlockButton onClick={changeRepetitions}><Heading1>{props.value.length} x</Heading1></BlockButton>
             <BlockButton onClick={changeDuration}><Note src={findNote(props.value.base)} /></BlockButton>
             <BlockButton onClick={changeSilence}>{ props.value.silent ? '🔇' : '🔉'}</BlockButton>
             <BlockButton onClick={deleteStep}>❌</BlockButton>

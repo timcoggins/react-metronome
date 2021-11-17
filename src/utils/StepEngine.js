@@ -24,11 +24,15 @@ class StepEngine {
         this.currentSubStep = 0;
         this.useReset = true;
 
+        this.soundPrimary = './samples/BD CR78 MPC60 05.wav';
+        this.soundSecondary = './samples/Clave CR78 MPC60 10.wav';
+        this.soundReset = './samples/CLICKHIGH.wav';
+
         // Tone Players
         this.vol = new Tone.Volume().toDestination();
-        this.osc = new Tone.Player("./samples/BD CR78 MPC60 05.wav").connect(this.vol);
-        this.osc2 = new Tone.Player("./samples/Clave CR78 MPC60 10.wav").connect(this.vol);
-        this.osc3 = new Tone.Player("./samples/CLICKHIGH.wav").connect(this.vol);
+        this.osc = new Tone.Player(this.soundPrimary).connect(this.vol);
+        this.osc2 = new Tone.Player(this.soundSecondary).connect(this.vol);
+        this.osc3 = new Tone.Player(this.soundReset).connect(this.vol);
     }
 
     /**
@@ -101,9 +105,14 @@ class StepEngine {
      * @param reset
      */
     updateSounds = (primary, alt, reset) => {
-        this.osc.load(`./samples/${primary}`)
-        this.osc2.load(`./samples/${alt}`)
-        this.osc3.load(`./samples/${reset}`)
+
+        this.soundPrimary = primary;
+        this.soundSecondary = alt;
+        this.soundReset = reset;
+
+        this.osc.load(primary)
+        this.osc2.load(alt)
+        this.osc3.load(reset)
     }
 
     /**

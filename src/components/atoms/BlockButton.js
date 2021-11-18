@@ -12,7 +12,7 @@ const BlockButton = styled.button`
     border: 0;
     cursor: pointer;
     padding: 6px;
-    border-radius: 8px;
+    //border-radius: 8px;
     width: 70px;
     height: 70px;
     //margin: 2px;

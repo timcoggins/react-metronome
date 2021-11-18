@@ -8,7 +8,7 @@ import styled from "styled-components";
 const BlockAdd = styled.div`
     width: 150px;
     height: 150px;
-    border-radius: 4px;
+    //border-radius: 4px;
     border: 1px solid rgba(209, 213, 219, 0.3);
   
     display: flex;

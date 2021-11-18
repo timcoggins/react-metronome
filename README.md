@@ -13,7 +13,7 @@ The aim of this metronome is to encourage exploration of odd meters and irregula
 - Responsive
 - Midi Output to trigger other software/hardware
 - 32nd Notes, dotted notes, maybe tuplets
-- Possiblity to add a second sequencer for overlapping polyrhythmic stuff
+- Possibility to add a second sequencer for overlapping polyrhythmic stuff
 - Another user programmable sound for when the sequence restarts
 
 ## License

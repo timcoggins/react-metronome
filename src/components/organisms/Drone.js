@@ -72,7 +72,7 @@ const Drone = () => {
         <SideBarItem title={'Drones'}>
             <SideBarControls>
                 <Select onChange={droneHandler}>
-                    {droneList.map(item => <option key={() => nanoid()} value={item.file}>{item.name}</option>)}
+                    {droneList.map(item => <option key={nanoid()} value={item.file}>{item.name}</option>)}
                 </Select>
                 <TransportButton disabled={isLoading} onClick={playButtonHandler}>
                     <span className="material-icons" style={isPlaying === true ? {color: 'black'} : {color: 'green'}}>

@@ -4,21 +4,49 @@
  */
 import React from "react";
 import { ThemeProvider } from "styled-components";
+import { useContext } from "react";
+import ThemeContext from "../contexts/ThemeContext";
 
 // Styles
 const lightTheme = {
     colors: {
 
-
-        headingColor: "#000000",
+        headingColor: "#ffffff",
         paragraphColor: "#313131",
 
         // Backgrounds
-        contentBackground: "#FFFFFF",
-        expandBackground: "#dcdcdc",
-        buttonColor: "#313131",
-        buttonBackground: "#dcdcdc",
-        borderColor: "#886F68"
+        contentText: "#FFFFFF",
+        contentBackground: "#414C50",
+        navbarBackground: "#39ABE7",
+
+        expandArrow: "#FFFFFF",
+        expandBackground: "#2D383C",
+
+        buttonText: "#ffffff",
+        buttonBackground: "#2D383C",
+
+        buttonTextDisabled: "#414C50",
+        buttonBackgroundDisabled: "#192428",
+
+        selectText: "#ffffff",
+        selectBackground: "#2D383C",
+
+        activeNoteBackground: "#949494",
+
+        // Block
+
+        blockBackground: "#0683B5",
+        blockText: "#ffffff",
+        blockBackgroundHover: "#39ABE7",
+        blockTextHover: "#ffffff",
+        blockBackgroundDisabled: "#2D383C",
+        blockTextDisabled: "#ffffff",
+        blockBackgroundPrimary: "#0683B5",
+        blockTextPrimary: "#ffffff",
+        blockBackgroundActive: "#85d2ad",
+        blockTextActive: "#ffffff",
+
+        borderColor: "#192428"
 
     },
     fonts: ["sans-serif", "Poppins"],
@@ -76,9 +104,13 @@ const darkTheme = {
     }
 };
 
-const Theme = ({ children }) => (
-    <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>
-);
+const Theme = ({ children }) => {
+    const { darkMode } = useContext(ThemeContext);
+    return (
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>
+    );
+}
+
 
 export default Theme;
  

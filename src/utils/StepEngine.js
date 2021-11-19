@@ -9,7 +9,7 @@ class StepEngine {
      * Constructor
      * @param data array of steps
      */
-    constructor(data) {
+    constructor(data, updatePosition) {
 
 
         // TODO check to see if the samples are loaded before playing
@@ -17,6 +17,7 @@ class StepEngine {
         // Data
         this.data = data;
         this.isPlaying = false;
+        this.updatePosition = updatePosition
 
         // Step Counters
         this.currentStep = 0;
@@ -57,9 +58,14 @@ class StepEngine {
             if (this.currentLargeStep >= this.data[this.currentStep].length) {
                 this.currentLargeStep = 0;
                 if(this.currentStep >= this.data.length - 1) this.currentStep = 0
-                else this.currentStep += 1;
+                else {
+                    this.currentStep += 1;
+                }
+                this.updatePosition(this.currentStep)
             }
         }
+
+
     }
 
     /**
@@ -70,9 +76,7 @@ class StepEngine {
         // Reset back to zero
         this.setToZero()
         // Schedules the clock
-        Tone.Transport.scheduleRepeat((time) => {
-            this.step(time)
-        }, "16n");
+        Tone.Transport.scheduleRepeat((time) => this.step(time), "16n");
         // Start ToneJS
         Tone.start()
             .then(() => Tone.Transport.start())
@@ -110,9 +114,15 @@ class StepEngine {
         this.soundSecondary = alt;
         this.soundReset = reset;
 
-        this.osc.load(primary)
-        this.osc2.load(alt)
-        this.osc3.load(reset)
+        this.osc.load(`./${primary}`)
+            //.then(() => console.log('loaded'))
+            .catch(() => console.log('could not load sample'))
+        this.osc2.load(`./${alt}`)
+            //.then(() => console.log('loaded'))
+            .catch(() => console.log('could not load sample'))
+        this.osc3.load(`./${reset}`)
+            //.then(() => console.log('loaded'))
+            .catch(() => console.log('could not load sample'))
     }
 
     /**

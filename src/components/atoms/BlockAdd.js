@@ -21,7 +21,7 @@ const BlockAdd = styled.div`
     opacity: 0.4;
     color: white;
   
-    background: #477147;
+    background: ${props => props.theme.colors.blockBackground};
     backdrop-filter: blur(25px) saturate(191%);
     -webkit-backdrop-filter: blur(25px) saturate(191%);
   

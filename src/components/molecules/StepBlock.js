@@ -11,6 +11,7 @@ import Heading1 from "../atoms/H1";
 
 import { useContext } from "react";
 import StepContext from "../../contexts/StepContext";
+import EngineContext from "../../contexts/EngineContext";
 
 import quaver from '../../assets/images/quaver.png'
 import semiquaver from '../../assets/images/semiquaver.png'
@@ -27,6 +28,7 @@ const StepBlock = (props) => {
 
 
     const { stepData, setStepData } = useContext(StepContext)
+    const { currentStep } = useContext(EngineContext)
 
     /**
      * Changes the number of repetitions
@@ -87,7 +89,7 @@ const StepBlock = (props) => {
     return(
         <Block
             //primary={props.value.id === props.selectedStep.id}
-            //active={props.index === active}
+            active={props.index === currentStep}
             //onClick={() => props.editStep(props.value.id)}
             disabled={props.value.silent}
         >

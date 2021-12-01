@@ -47,9 +47,10 @@ const Patterns = () => {
 
 
     /**
-     * Query to get all of the patterns from the api
+     * Setup React Query to get all of the patterns from the api
      */
     const { refetch } = useQuery('getAllPatterns', () => axios.get(`${base}/patterns`,
+    //  // Restrict to logged in users only
     //     {
     //     headers: {
     //         Authorization:
@@ -66,8 +67,7 @@ const Patterns = () => {
     }, [stepData])
 
     /**
-     * Query to update a pattern
-     * @type
+     * Setup React Query to update a pattern with a mutation
      */
     const updatePattern = useMutation(newTodo => {
         return axios.put(`${base}/patterns/${patternId}`, newTodo, {
@@ -79,8 +79,7 @@ const Patterns = () => {
     }, { onSuccess: () => refetch() })
 
     /**
-     * Query to update a pattern
-     * @type
+     * Setup React Query to delete a pattern
      */
     const deletePattern = useMutation(newTodo => {
         return axios.delete(`${base}/patterns/${patternId}`, {
@@ -92,8 +91,7 @@ const Patterns = () => {
     }, { onSuccess: () => refetch() })
 
     /**
-     * Query to save a pattern
-     * @type
+     * Setup React Query Mutation to save a pattern
      */
     const postPattern = useMutation(newTodo => {
         return axios.post(`${base}/patterns`, newTodo, {
@@ -105,7 +103,7 @@ const Patterns = () => {
     }, { onSuccess: () => refetch() })
 
     /**
-     * Save as Handler for the Save button
+     * Button Handler for Save As
      */
     const saveAsHandler = () => {
         postPattern.mutate({
@@ -123,10 +121,9 @@ const Patterns = () => {
     }
 
     /**
-     * Save Handler for the Save button
+     * Button Handler as Save
      */
     const updateHandler = () => {
-
         updatePattern.mutate({
                 name: patternName,
                 author: 'Tim',
@@ -142,7 +139,7 @@ const Patterns = () => {
     }
 
     /**
-     * Delete Handler for the Save button
+     * Button Handler for Delete
      */
     const deleteHandler = () => {
         deletePattern.mutate({
@@ -157,7 +154,7 @@ const Patterns = () => {
     const handleNameChange = (e) => {setPatternName(e.target.value)}
 
     /**
-     * Handle Loading a pattern
+     * Button Handler for Loading a pattern
      */
     const loadHandler = () => {
 
@@ -186,6 +183,7 @@ const Patterns = () => {
     // JSX
     return(
         <SideBarItem title={'Patterns'}>
+            {/*Loading Pattern Dropdown*/}
             <SideBarControls>
                 <Select value={selected} onChange={(e) => setSelect(e.target.value)}>
                     {patternList.length !== 0 && patternList.map((item, index) =>
@@ -208,6 +206,7 @@ const Patterns = () => {
                 </SideBarControls>
             </div>}
 
+            {/* TODO Consolidate User Messages */}
             {postPattern.isError && <P>An error occurred: {postPattern.error.message}</P>}
             {postPattern.isSuccess && <P>Pattern added!</P>}
             {updatePattern.isError && <P>An error occurred: {updatePattern.error.message}</P>}

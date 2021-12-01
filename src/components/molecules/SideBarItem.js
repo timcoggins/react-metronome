@@ -15,20 +15,20 @@ import Expand from '../atoms/Expand'
  * SideBarItem Component
  * @returns {JSX.Element}
  */
-
 const SideBarItem = (props) => {
 
-    const [display, setDisplay] = useState(false)
+    // State which handles if the side bar item is open or closed
+    const [isOpen, setIsOpen] = useState(false)
 
     return(
         <SideBarContainer>
-            <SideBarHeading onClick={() => setDisplay(!display)}>
+            <SideBarHeading onClick={() => setIsOpen(!isOpen)}>
                 <Heading3>{props.title}</Heading3>
                 <Expand><span className="material-icons">
-                    {display === true ? 'expand_less' : 'expand_more'}
+                    {isOpen === true ? 'expand_less' : 'expand_more'}
                 </span></Expand>
             </SideBarHeading>
-            {display === true && <div>{props.children}</div>}
+            {isOpen === true && <div>{props.children}</div>}
         </SideBarContainer>
     );
 }

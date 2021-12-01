@@ -10,10 +10,11 @@ import H1 from "../atoms/H1";
 
 import logoImage from "../../assets/images/musicwhite.svg";
 
+/**
+ * NavBar Component
+ */
 const NavBar = (props) => {
-
     // JSX
-
     return (
         <NavBarContainer>
             {/* Site Title */}

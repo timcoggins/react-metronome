@@ -9,12 +9,14 @@ import { nanoid } from "nanoid";
 import { useState, useEffect } from 'react'
 import { useContext } from "react";
 import EngineContext from "../../contexts/EngineContext";
+
 import SideBarItem from "../molecules/SideBarItem";
 import SideBarControls from "../atoms/SideBarControls";
 import Select from "../atoms/Select";
 import Input from "../atoms/Input";
 import P from "../atoms/P"
 
+// Sample List
 import samples from '../../assets/data/sampleList'
 
 /**
@@ -27,8 +29,6 @@ const SoundOptions = () => {
     // Consume the engine context
     const { engine } = useContext(EngineContext)
 
-    //const [sampleList, setSampleList] = useState([])
-
     // State variables for the dropdown selectors
     const [downbeatSound, setDownbeatSound] = useState('samples/BD CR78 MPC60 05.wav')
     const [upbeatSound, setUpbeatSound] = useState('samples/Clave CR78 MPC60 10.wav')
@@ -38,21 +38,6 @@ const SoundOptions = () => {
     const [toggleDownbeat, setToggleDownbeat] = useState(true);
     const [toggleUpbeat, setToggleUpbeat] = useState(true);
     const [toggleRestart, setToggleRestart] = useState(true);
-
-    /**
-     * Axios request to get the samples
-     */
-    // const getSampleList = () => {
-    //     // Make a request for a user with a given ID
-    //     axios.get('http://localhost/samples')
-    //         .then(response => setSampleList([...response.data]))
-    //         .catch(error => console.log(error));
-    // }
-    //
-    // // Get the list of samples when the component mounts
-    // useEffect(() => getSampleList(), [])
-
-
 
     // Update the sounds if the user changed something
     // eslint-disable-next-line

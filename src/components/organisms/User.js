@@ -14,19 +14,19 @@ import Button from "../atoms/Button";
 import SideBarControls from "../atoms/SideBarControls";
 import Input from "../atoms/Input"
 
+// Backend url
 const base = 'https://metronomic-backend.herokuapp.com'
 
 /**
- * Notes Component
+ * User Component
  * @returns {JSX.Element}
  */
 const User = () => {
 
+    // Declare
     const { userData, setUserData } = useContext(UserContext)
     const username = useRef(null);
     const password = useRef(null);
-
-    //useEffect(() => console.log(userData), [userData])
 
     /**
      * Query to save a pattern
@@ -38,23 +38,28 @@ const User = () => {
             password: password.current.value,
         })
     }, { onSuccess: (data) => {
+            // Store the users JWT
             setUserData({
             jwt: data.data.jwt,
             id: data.data.user.id,
             name: data.data.user.username})
         } })
 
+
     /**
-     *
+     * Clears the user data to logout
      */
-    const login = () => loginMutation.mutate();
     const logout = () => setUserData({
         id: null,
         jwt: null,
         name: null
     })
+
+    // JSX
     return(
         <SideBarItem title={'User'}>
+
+            {/*When the user is logged in*/}
             {userData.jwt && <>
                 <P>Hello {userData.name}!</P>
                 <SideBarControls>
@@ -62,6 +67,7 @@ const User = () => {
                 </SideBarControls>
             </>}
 
+            {/*When the user is not logged in*/}
             {!userData.jwt && <>
                 <P>Login to save patterns</P>
                 <SideBarControls>
@@ -71,10 +77,11 @@ const User = () => {
                     <P>Pass:</P><Input type={'password'} ref={password}/>
                 </SideBarControls>
                 <SideBarControls>
-                    <Button onClick={login}>Login</Button>
+                    <Button onClick={() => loginMutation.mutate()}>Login</Button>
                     <Button disabled>Create</Button>
                 </SideBarControls>
             </>}
+
         </SideBarItem>
     );
 }

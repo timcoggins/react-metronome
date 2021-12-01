@@ -2,6 +2,7 @@
  * StepContext.js
  * Provides the context for holder the step data
  */
+// TODO This can be merged back into EngineContext
 import { createContext, useState } from "react";
 import patternList from "../assets/data/patternList";
 

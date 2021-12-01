@@ -1,3 +1,4 @@
+// LEGACY
 /**
  * StepEditor.js
  * Component which handles the UI for editing a step

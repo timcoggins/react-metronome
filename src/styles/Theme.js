@@ -2,15 +2,16 @@
  * Theme.js
  * Provides the theme for the app
  */
-import React from "react";
 import { ThemeProvider } from "styled-components";
 import { useContext } from "react";
 import ThemeContext from "../contexts/ThemeContext";
 
+// TODO Theme Colours
+
+
 // Styles
 const lightTheme = {
     colors: {
-
         headingColor: "#ffffff",
         paragraphColor: "#313131",
 
@@ -47,19 +48,17 @@ const lightTheme = {
         blockTextActive: "#ffffff",
 
         borderColor: "#192428"
-
-    },
-    fonts: ["sans-serif", "Poppins"],
-    fontSizes: {
-        small: "1em",
-        medium: "2em",
-        large: "3em"
     }
+    // fonts: ["sans-serif", "Poppins"],
+    // fontSizes: {
+    //     small: "1em",
+    //     medium: "2em",
+    //     large: "3em"
+    // }
 };
 
 const darkTheme = {
     colors: {
-
 
         headingColor: "#ffffff",
         paragraphColor: "#313131",
@@ -94,14 +93,13 @@ const darkTheme = {
         blockTextActive: "#ffffff",
 
         borderColor: "#181818"
-
-    },
-    fonts: ["sans-serif", "Poppins"],
-    fontSizes: {
-        small: "1em",
-        medium: "2em",
-        large: "3em"
     }
+    // fonts: ["sans-serif", "Poppins"],
+    // fontSizes: {
+    //     small: "1em",
+    //     medium: "2em",
+    //     large: "3em"
+    // }
 };
 
 const Theme = ({ children }) => {

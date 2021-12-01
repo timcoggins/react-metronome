@@ -1,17 +1,28 @@
+/**
+ * App.js
+ * Top Level App Component
+ */
+// Imports
+
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { useState } from 'react'
+import { UserContextProvider } from "./contexts/UserContext";
+import { StepContextProvider } from "./contexts/StepContext";
+import { EngineProvider } from "./contexts/EngineContext";
+import ThemeContext from "./contexts/ThemeContext";
+import GlobalStyle from "./styles/GlobalStyles";
 import Metronome from './pages/Metronome'
 import Register from "./pages/Register";
-import {StepContextProvider} from "./contexts/StepContext";
 import Theme from './styles/Theme'
-import GlobalStyle from "./styles/GlobalStyles";
-import ThemeContext from "./contexts/ThemeContext";
-import { UserContextProvider } from "./contexts/UserContext";
-import {EngineProvider} from "./contexts/EngineContext";
 
+/**
+ * Top Level App Component
+ * @returns {JSX.Element}
+ */
 function App() {
+    // State for darkmode
     const [darkMode, setDarkMode] = useState(true);
-  return (
+    return (
       <UserContextProvider>
           <ThemeContext.Provider value={{darkMode, setDarkMode}}>
               <Theme>

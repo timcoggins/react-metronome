@@ -9,7 +9,7 @@ class StepEngine {
      * Constructor
      * @param data array of steps
      */
-    constructor(data, updatePosition) {
+    constructor(data) {
 
 
         // TODO check to see if the samples are loaded before playing
@@ -17,7 +17,7 @@ class StepEngine {
         // Data
         this.data = data;
         this.isPlaying = false;
-        this.updatePosition = updatePosition
+        //this.updatePosition = updatePosition
 
         // Step Counters
         this.currentStep = 0;
@@ -61,7 +61,8 @@ class StepEngine {
                 else {
                     this.currentStep += 1;
                 }
-                this.updatePosition(this.currentStep)
+                //this.updatePosition(this.currentStep)
+                //console.log(this.currentStep)
             }
         }
 
@@ -115,13 +116,13 @@ class StepEngine {
         this.soundReset = reset;
 
         this.osc.load(`./${primary}`)
-            //.then(() => console.log('loaded'))
+            .then(() => console.log('loaded primary'))
             .catch(() => console.log('could not load sample'))
         this.osc2.load(`./${alt}`)
-            //.then(() => console.log('loaded'))
+            .then(() => console.log('loaded secondary'))
             .catch(() => console.log('could not load sample'))
         this.osc3.load(`./${reset}`)
-            //.then(() => console.log('loaded'))
+            .then(() => console.log('loaded reset'))
             .catch(() => console.log('could not load sample'))
     }
 

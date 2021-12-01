@@ -6,8 +6,8 @@
 // Imports
 import * as Tone from "tone";
 import { useState } from "react";
-
 import { nanoid } from 'nanoid'
+
 import SideBarItem from "../molecules/SideBarItem";
 import SliderContainer from "../atoms/SliderContainer";
 import TransportButton from "../atoms/TransportButton";
@@ -16,6 +16,7 @@ import Input from "../atoms/Input";
 import Select from "../atoms/Select";
 import P from "../atoms/P"
 
+// Data list
 import droneList from "../../assets/data/droneList";
 
 // Globals
@@ -68,6 +69,7 @@ const Drone = () => {
             .catch(() => {setFileLoaded('Error Loading File')})
     }
 
+    // JSX
     return(
         <SideBarItem title={'Drones'}>
             <SideBarControls>

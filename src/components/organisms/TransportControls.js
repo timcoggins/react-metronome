@@ -21,22 +21,26 @@ import Input from "../atoms/Input";
 const TransportControls = () => {
 
     // Consume the engine context
-    const { engine } = useContext(EngineContext)
+    const { engine, isPlaying, setIsPlaying } = useContext(EngineContext)
 
     // State Variables
     const [tempo, setTempo] = useState(120)
     //const [volume, setVolume] = useState(-6)
 
-    const [isPlaying, setIsPlaying] = useState(false)
-    useEffect(() => setIsPlaying(engine.isPlaying), [engine.isPlaying])
     useEffect(() => setTempo(parseInt(Tone.Transport.bpm.value)), [Tone.Transport.bpm.value])
 
     /**
      * Handles the play button
      */
     const playStopButtonHandler = () => {
-        if(engine.isPlaying) engine.stop()
-        else engine.start()
+        if(isPlaying) {
+            engine.stop()
+            setIsPlaying(false)
+        }
+        else {
+            engine.start()
+            setIsPlaying(true)
+        }
     }
 
     /**
@@ -48,6 +52,7 @@ const TransportControls = () => {
         Tone.Transport.bpm.value = event.target.value;
     }
 
+    // TODO Decide what to do with the volume controls, individual or bus?
     /**
      * Handles when the user changes the volume slider
      * @param event

@@ -1,3 +1,4 @@
+// LEGACY
 /**
  * Notes.js
  * Displays simple usage notes to the user

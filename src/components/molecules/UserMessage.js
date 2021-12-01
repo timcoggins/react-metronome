@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import Heading3 from "../atoms/H3";
 
 // Styles
-
+// TODO This should probably be split, although I think this component is redundant now
 const MessageContainer = styled.div`
   //background-color: ${props => props.theme.colors.middleGreen};
   display: grid;
@@ -23,7 +23,6 @@ const MessageBox = styled.div`
   padding: 20px;
   text-align: center;
   border-radius: 4px;
-  
 `
 
 /**

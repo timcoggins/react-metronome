@@ -4,13 +4,14 @@
  */
 
 // Import
+import { useContext } from "react";
+import StepContext from "../../contexts/StepContext";
+import EngineContext from "../../contexts/EngineContext";
+
 import Note from "../atoms/Note";
 import Block from "../atoms/Block";
 import BlockButton from "../atoms/BlockButton"
 import Heading1 from "../atoms/H1";
-
-import { useContext } from "react";
-import StepContext from "../../contexts/StepContext";
 
 import quaver from '../../assets/images/quaver.png'
 import semiquaver from '../../assets/images/semiquaver.png'
@@ -22,11 +23,10 @@ import minim from '../../assets/images/minim.png'
  * @param props
  * @returns {JSX.Element}
  */
-
 const StepBlock = (props) => {
 
-
     const { stepData, setStepData } = useContext(StepContext)
+    const { currentStep } = useContext(EngineContext)
 
     /**
      * Changes the number of repetitions
@@ -86,12 +86,10 @@ const StepBlock = (props) => {
     // JSX
     return(
         <Block
-            //primary={props.value.id === props.selectedStep.id}
-            //active={props.index === active}
-            //onClick={() => props.editStep(props.value.id)}
+            //active={props.index === currentStep}
             disabled={props.value.silent}
         >
-             <BlockButton onClick={changeRepetitions}><Heading1>{props.value.length} x</Heading1></BlockButton>
+            <BlockButton onClick={changeRepetitions}><Heading1>{props.value.length} x</Heading1></BlockButton>
             <BlockButton onClick={changeDuration}><Note src={findNote(props.value.base)} /></BlockButton>
             <BlockButton onClick={changeSilence}>{ props.value.silent ? '🔇' : '🔉'}</BlockButton>
             <BlockButton onClick={deleteStep}>❌</BlockButton>

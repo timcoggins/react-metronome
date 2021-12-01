@@ -4,11 +4,10 @@
  */
 
 // Imports
-import * as Tone from "tone";
-import StepEngine from "../utils/StepEngine";
 import { useEffect } from "react";
 import { useContext } from "react";
 import StepContext from "../contexts/StepContext";
+import EngineContext from "../contexts/EngineContext";
 
 import MainWindow from "../components/atoms/MainWindow";
 import SideBar from "../components/atoms/SideBar";
@@ -19,14 +18,7 @@ import Patterns from "../components/organisms/Patterns";
 import Drone from "../components/organisms/Drone";
 import User from '../components/organisms/User'
 import TransportControls from "../components/organisms/TransportControls";
-
-import patternList from "../assets/data/patternList";
-
-// Globals
-const initialData = patternList[0].data // Load the initial pattern
-
-// Create the metronome engine
-const engine = new StepEngine(initialData);
+import Options from "../components/organisms/Options";
 
 /**
  * Metronome Component
@@ -37,24 +29,27 @@ const Metronome = () => {
 
     // Import the context
     const { stepData } = useContext(StepContext)
+    const { engine } = useContext(EngineContext)
 
     // Update the data in the engine
-    useEffect(() => engine.data = stepData, [stepData])
+    // eslint-disable-next-line
+    useEffect(() => engine.data = stepData, [stepData, engine.data])
 
     // JSX
     return (
         <>
             <NavBar>
-                <TransportControls tone={Tone} engine={engine}/>
+                <TransportControls/>
             </NavBar>
             <MainWindow>
                 <SideBar>
-                    <SoundOptions engine={engine}/>
-                    <Patterns engine={engine}/>
+                    <SoundOptions/>
+                    <Patterns/>
                     <User />
                     <Drone/>
+                    <Options />
                 </SideBar>
-                <StepGrid engine={engine}/>
+                <StepGrid/>
             </MainWindow>
         </>
     )

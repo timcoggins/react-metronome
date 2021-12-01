@@ -4,13 +4,12 @@
  */
 
 // Import
-
 import { nanoid } from "nanoid";
-import Heading2 from "../atoms/H2"
-import BlockAdd from "../atoms/BlockAdd";
-
 import { useContext } from "react";
 import StepContext from "../../contexts/StepContext";
+
+import Heading2 from "../atoms/H2"
+import BlockAdd from "../atoms/BlockAdd";
 
 /**
  * StepBlockAdd Component
@@ -19,10 +18,8 @@ import StepContext from "../../contexts/StepContext";
  */
 const StepBlockAdd = (props) => {
 
-    // Use the context
+    // Consume the context
     const { stepData, setStepData } = useContext(StepContext)
-
-
 
     /**
      * Adds a new step to the Step Data
@@ -38,7 +35,6 @@ const StepBlockAdd = (props) => {
     }
 
     // JSX
-
     return(
         <BlockAdd onClick={addStep}>
             <Heading2>+</Heading2>

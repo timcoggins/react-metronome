@@ -2,36 +2,63 @@
  * Theme.js
  * Provides the theme for the app
  */
-import React from "react";
 import { ThemeProvider } from "styled-components";
+import { useContext } from "react";
+import ThemeContext from "../contexts/ThemeContext";
+
+// TODO Theme Colours
+
 
 // Styles
 const lightTheme = {
     colors: {
-
-
-        headingColor: "#000000",
+        headingColor: "#ffffff",
         paragraphColor: "#313131",
 
         // Backgrounds
-        contentBackground: "#FFFFFF",
-        expandBackground: "#dcdcdc",
-        buttonColor: "#313131",
-        buttonBackground: "#dcdcdc",
-        borderColor: "#886F68"
+        contentText: "#FFFFFF",
+        contentBackground: "#414C50",
+        navbarBackground: "#39ABE7",
 
-    },
-    fonts: ["sans-serif", "Poppins"],
-    fontSizes: {
-        small: "1em",
-        medium: "2em",
-        large: "3em"
+        expandArrow: "#FFFFFF",
+        expandBackground: "#2D383C",
+
+        buttonText: "#ffffff",
+        buttonBackground: "#2D383C",
+
+        buttonTextDisabled: "#414C50",
+        buttonBackgroundDisabled: "#192428",
+
+        selectText: "#ffffff",
+        selectBackground: "#2D383C",
+
+        activeNoteBackground: "#949494",
+
+        // Block
+
+        blockBackground: "#0683B5",
+        blockText: "#ffffff",
+        blockBackgroundHover: "#39ABE7",
+        blockTextHover: "#ffffff",
+        blockBackgroundDisabled: "#2D383C",
+        blockTextDisabled: "#ffffff",
+        blockBackgroundPrimary: "#0683B5",
+        blockTextPrimary: "#ffffff",
+        blockBackgroundActive: "#85d2ad",
+        blockTextActive: "#ffffff",
+
+        borderColor: "#192428"
     }
+    // fonts: ["sans-serif", "Poppins"],
+    // fontSizes: {
+    //     small: "1em",
+    //     medium: "2em",
+    //     large: "3em"
+    // }
 };
 
 const darkTheme = {
     colors: {
-
 
         headingColor: "#ffffff",
         paragraphColor: "#313131",
@@ -66,19 +93,22 @@ const darkTheme = {
         blockTextActive: "#ffffff",
 
         borderColor: "#181818"
-
-    },
-    fonts: ["sans-serif", "Poppins"],
-    fontSizes: {
-        small: "1em",
-        medium: "2em",
-        large: "3em"
     }
+    // fonts: ["sans-serif", "Poppins"],
+    // fontSizes: {
+    //     small: "1em",
+    //     medium: "2em",
+    //     large: "3em"
+    // }
 };
 
-const Theme = ({ children }) => (
-    <ThemeProvider theme={darkTheme}>{children}</ThemeProvider>
-);
+const Theme = ({ children }) => {
+    const { darkMode } = useContext(ThemeContext);
+    return (
+        <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>{children}</ThemeProvider>
+    );
+}
+
 
 export default Theme;
  

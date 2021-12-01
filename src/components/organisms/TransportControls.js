@@ -5,6 +5,8 @@
 
 // Imports
 import { useState, useEffect } from 'react'
+import { useContext } from "react";
+import EngineContext from "../../contexts/EngineContext";
 import TransportContainer from "../atoms/TransportContainer";
 import TransportButton from "../atoms/TransportButton";
 import SliderContainer from "../atoms/SliderContainer";
@@ -16,22 +18,29 @@ import Input from "../atoms/Input";
  * @param props
  * @returns {JSX.Element}
  */
-const TransportControls = (props) => {
+const TransportControls = () => {
+
+    // Consume the engine context
+    const { engine, isPlaying, setIsPlaying } = useContext(EngineContext)
 
     // State Variables
     const [tempo, setTempo] = useState(120)
     //const [volume, setVolume] = useState(-6)
 
-    const [isPlaying, setIsPlaying] = useState(false)
-    useEffect(() => setIsPlaying(props.engine.isPlaying), [props.engine.isPlaying])
     useEffect(() => setTempo(parseInt(Tone.Transport.bpm.value)), [Tone.Transport.bpm.value])
 
     /**
      * Handles the play button
      */
     const playStopButtonHandler = () => {
-        if(props.engine.isPlaying) props.engine.stop()
-        else props.engine.start()
+        if(isPlaying) {
+            engine.stop()
+            setIsPlaying(false)
+        }
+        else {
+            engine.start()
+            setIsPlaying(true)
+        }
     }
 
     /**
@@ -43,6 +52,7 @@ const TransportControls = (props) => {
         Tone.Transport.bpm.value = event.target.value;
     }
 
+    // TODO Decide what to do with the volume controls, individual or bus?
     /**
      * Handles when the user changes the volume slider
      * @param event

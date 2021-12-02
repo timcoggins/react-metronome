@@ -6,7 +6,7 @@
 // Import
 import { nanoid } from "nanoid";
 import { useContext } from "react";
-import StepContext from "../../contexts/StepContext";
+import EngineContext from "../../contexts/EngineContext";
 
 import Heading2 from "../atoms/H2"
 import BlockAdd from "../atoms/BlockAdd";
@@ -16,10 +16,10 @@ import BlockAdd from "../atoms/BlockAdd";
  * @param props
  * @returns {JSX.Element}
  */
-const StepBlockAdd = (props) => {
+const StepBlockAdd = () => {
 
     // Consume the context
-    const { stepData, setStepData } = useContext(StepContext)
+    const { stepData, setStepData } = useContext(EngineContext)
 
     /**
      * Adds a new step to the Step Data

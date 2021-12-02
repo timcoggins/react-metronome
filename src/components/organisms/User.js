@@ -4,8 +4,8 @@
  */
 
 // Imports
-import { useMutation } from "react-query";
 import axios from "axios";
+import { useMutation } from "react-query";
 import { useContext, useRef } from "react";
 import UserContext from "../../contexts/UserContext";
 import SideBarItem from "../molecules/SideBarItem";

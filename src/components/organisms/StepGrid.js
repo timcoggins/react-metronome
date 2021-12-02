@@ -11,7 +11,7 @@ import StepBlockAdd from "../molecules/StepBlockAdd";
 import BlockContainer from "../atoms/BlockContainer";
 
 import { useContext } from "react";
-import StepContext from "../../contexts/StepContext";
+import EngineContext from "../../contexts/EngineContext";
 
 /**
  * StepGrid Component
@@ -20,15 +20,15 @@ import StepContext from "../../contexts/StepContext";
  */
 const StepGrid = (props) => {
 
-    const { stepData } = useContext(StepContext)
+    const { stepData, activeStep } = useContext(EngineContext)
     // JSX
     return(
         <BlockContainer>
             {/* Loop through and a display a block for each step*/}
             {stepData.map((item, index) =>
-                <StepBlock key={nanoid()} value={item} index={index} activeStep={props.activeStep}/>
+                <StepBlock key={nanoid()} value={item} index={index} activeStep={activeStep}/>
             )}
-            <StepBlockAdd addStep={props.addStep}/>
+            <StepBlockAdd/>
         </BlockContainer>
     )
 }

@@ -10,7 +10,6 @@ import { useState, useEffect, useContext } from 'react'
 import { nanoid } from "nanoid";
 import { useQuery, useMutation } from "react-query";
 
-import StepContext from "../../contexts/StepContext";
 import UserContext from "../../contexts/UserContext";
 import EngineContext from "../../contexts/EngineContext";
 
@@ -32,9 +31,8 @@ const base = 'https://metronomic-backend.herokuapp.com'
 const Patterns = () => {
 
     // Consume the contexts
-    const { engine } = useContext(EngineContext)
+    const { stepData, setStepData, soundPrimary, soundSecondary, soundReset, osc, osc2, osc3, updateSounds } = useContext(EngineContext)
     const { userData } = useContext(UserContext)
-    const { stepData, setStepData } = useContext(StepContext)
 
     // State variables
     const [ patternId, setPatternId ] = useState(0)
@@ -109,13 +107,13 @@ const Patterns = () => {
         postPattern.mutate({
             name: patternName,
             author: userData.name,
-            sound_primary: engine.soundPrimary,
-            sound_secondary: engine.soundSecondary,
-            sound_reset: engine.soundReset,
+            sound_primary: soundPrimary,
+            sound_secondary: soundSecondary,
+            sound_reset: soundReset,
             tempo: Tone.Transport.bpm.value,
-            mute_primary: engine.osc.mute,
-            mute_secondary: engine.osc2.mute,
-            mute_reset: engine.osc3.mute,
+            mute_primary: osc.mute,
+            mute_secondary: osc2.mute,
+            mute_reset: osc3.mute,
             data: stepData
         })
     }
@@ -127,13 +125,13 @@ const Patterns = () => {
         updatePattern.mutate({
                 name: patternName,
                 author: 'Tim',
-                sound_primary: engine.soundPrimary,
-                sound_secondary: engine.soundSecondary,
-                sound_reset: engine.soundReset,
+                sound_primary: soundPrimary,
+                sound_secondary: soundSecondary,
+                sound_reset: soundReset,
                 tempo: parseInt(Tone.Transport.bpm.value),
-                mute_primary: engine.osc.mute,
-                mute_secondary: engine.osc2.mute,
-                mute_reset: engine.osc3.mute,
+                mute_primary: osc.mute,
+                mute_secondary: osc2.mute,
+                mute_reset: osc3.mute,
                 data: stepData
         })
     }
@@ -171,11 +169,11 @@ const Patterns = () => {
 
         setPatternId(pattern.id)
         setPatternName(pattern.name)
-        engine.updateSounds(pattern.sound_primary, pattern.sound_secondary, pattern.sound_reset)
+        updateSounds(pattern.sound_primary, pattern.sound_secondary, pattern.sound_reset)
         Tone.Transport.bpm.value = pattern.tempo
-        engine.osc.mute = pattern.mute_primary
-        engine.osc2.mute = pattern.mute_secondary
-        engine.osc3.mute = pattern.mute_reset
+        osc.mute = pattern.mute_primary
+        osc2.mute = pattern.mute_secondary
+        osc3.mute = pattern.mute_reset
         setStepData(pattern.data);
     }
 

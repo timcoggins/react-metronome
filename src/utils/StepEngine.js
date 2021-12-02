@@ -62,7 +62,7 @@ class StepEngine {
                     this.currentStep += 1;
                 }
                 //this.updatePosition(this.currentStep)
-                //console.log(this.currentStep)
+                //console.log(currentStep)
             }
         }
 

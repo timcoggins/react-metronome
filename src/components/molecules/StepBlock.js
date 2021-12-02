@@ -5,7 +5,6 @@
 
 // Import
 import { useContext } from "react";
-import StepContext from "../../contexts/StepContext";
 import EngineContext from "../../contexts/EngineContext";
 
 import Note from "../atoms/Note";
@@ -25,8 +24,8 @@ import minim from '../../assets/images/minim.png'
  */
 const StepBlock = (props) => {
 
-    const { stepData, setStepData } = useContext(StepContext)
-    const { currentStep } = useContext(EngineContext)
+    const { stepData, setStepData } = useContext(EngineContext)
+    //const { currentStep } = useContext(EngineContext)
 
     /**
      * Changes the number of repetitions
@@ -86,7 +85,7 @@ const StepBlock = (props) => {
     // JSX
     return(
         <Block
-            //active={props.index === currentStep}
+            active={props.index === props.activeStep}
             disabled={props.value.silent}
         >
             <BlockButton onClick={changeRepetitions}><Heading1>{props.value.length} x</Heading1></BlockButton>

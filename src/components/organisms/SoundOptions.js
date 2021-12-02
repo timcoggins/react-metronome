@@ -27,7 +27,7 @@ import samples from '../../assets/data/sampleList'
 const SoundOptions = () => {
 
     // Consume the engine context
-    const { engine } = useContext(EngineContext)
+    const { updateSounds, muteDownbeat, muteUpbeat, muteRestart } = useContext(EngineContext)
 
     // State variables for the dropdown selectors
     const [downbeatSound, setDownbeatSound] = useState('samples/BD CR78 MPC60 05.wav')
@@ -41,15 +41,15 @@ const SoundOptions = () => {
 
     // Update the sounds if the user changed something
     // eslint-disable-next-line
-    useEffect(() => engine.updateSounds(downbeatSound, upbeatSound, restartSound), [downbeatSound, upbeatSound, restartSound]);
+    useEffect(() => updateSounds(downbeatSound, upbeatSound, restartSound), [downbeatSound, upbeatSound, restartSound]);
 
     // Update the mute states in the step engine when a change is made
     // eslint-disable-next-line
-    useEffect(() => engine.muteDownbeat(!toggleDownbeat), [toggleDownbeat]);
+    useEffect(() => muteDownbeat(!toggleDownbeat), [toggleDownbeat]);
     // eslint-disable-next-line
-    useEffect(() => engine.muteUpbeat(!toggleUpbeat), [toggleUpbeat]);
+    useEffect(() => muteUpbeat(!toggleUpbeat), [toggleUpbeat]);
     // eslint-disable-next-line
-    useEffect(() => engine.muteRestart(!toggleRestart), [toggleRestart]);
+    useEffect(() => muteRestart(!toggleRestart), [toggleRestart]);
 
 
     // JSX Element

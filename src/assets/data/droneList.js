@@ -24,7 +24,7 @@ const droneList = [
         name: 'B'
     },
     {
-        file: './drones/07 Cello Drone F#_Gb.mp3',
+        file: './drones/07 Cello Drone Gb.mp3',
         name: 'Gb'
     },
     {

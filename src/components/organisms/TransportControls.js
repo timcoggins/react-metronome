@@ -4,13 +4,13 @@
  */
 
 // Imports
+import * as Tone from "tone";
 import { useState, useEffect } from 'react'
 import { useContext } from "react";
 import EngineContext from "../../contexts/EngineContext";
 import TransportContainer from "../atoms/TransportContainer";
 import TransportButton from "../atoms/TransportButton";
 import SliderContainer from "../atoms/SliderContainer";
-import * as Tone from "tone";
 import Input from "../atoms/Input";
 
 /**
@@ -21,7 +21,7 @@ import Input from "../atoms/Input";
 const TransportControls = () => {
 
     // Consume the engine context
-    const { engine, isPlaying, setIsPlaying } = useContext(EngineContext)
+    const { start, stop, isPlaying } = useContext(EngineContext)
 
     // State Variables
     const [tempo, setTempo] = useState(120)
@@ -33,14 +33,8 @@ const TransportControls = () => {
      * Handles the play button
      */
     const playStopButtonHandler = () => {
-        if(isPlaying) {
-            engine.stop()
-            setIsPlaying(false)
-        }
-        else {
-            engine.start()
-            setIsPlaying(true)
-        }
+        if(isPlaying) stop()
+        else start()
     }
 
     /**
@@ -66,6 +60,7 @@ const TransportControls = () => {
 
     return (
         <>
+            {/* Play / Stop Button */}
             <TransportContainer>
                 <TransportButton onClick={playStopButtonHandler}>
                     <span
@@ -76,6 +71,8 @@ const TransportControls = () => {
                     </span>
                 </TransportButton>
             </TransportContainer>
+
+            {/* Tempo / Volume Sliders */}
             <TransportContainer>
                 <SliderContainer>
                     {tempo} bpm

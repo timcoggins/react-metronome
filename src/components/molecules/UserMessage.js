@@ -9,7 +9,7 @@ import styled from 'styled-components'
 import Heading3 from "../atoms/H3";
 
 // Styles
-// TODO This should probably be split, although I think this component is redundant now
+// TODO This should probably be split, although I think this component is redundant now, will probably be used when registering
 const MessageContainer = styled.div`
   //background-color: ${props => props.theme.colors.middleGreen};
   display: grid;

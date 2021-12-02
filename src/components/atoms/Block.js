@@ -11,7 +11,7 @@ const Block = styled.div`
     //border-radius: 4px;
     border: 1px solid rgba(209, 213, 219, 0.3);
     margin: 0;
-  padding: 0;
+    padding: 0;
     
     display: flex;
     flex-direction: row;
@@ -29,9 +29,7 @@ const Block = styled.div`
     background-color: ${props => props.theme.colors.blockBackground};
     
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    
-    
-
+  
     
     ${props => props.disabled && css`
         background: ${props => props.theme.colors.blockBackgroundDisabled};

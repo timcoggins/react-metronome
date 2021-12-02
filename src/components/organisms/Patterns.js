@@ -47,14 +47,7 @@ const Patterns = () => {
     /**
      * Setup React Query to get all of the patterns from the api
      */
-    const { refetch } = useQuery('getAllPatterns', () => axios.get(`${base}/patterns`,
-    //  // Restrict to logged in users only
-    //     {
-    //     headers: {
-    //         Authorization:
-    //             `Bearer ${userData.jwt}`,
-    //     }
-    // }
+    const { refetch } = useQuery('getAllPatterns', () => axios.get(`${base}/patterns`
     ), {
         onSuccess: (res) => setPatternList(res.data)
     })

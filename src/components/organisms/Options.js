@@ -23,6 +23,9 @@ const Options = () => {
             <SideBarControls>
                 <P>Theme:</P><Button onClick={() => setDarkMode(!darkMode)}>Switch</Button>
             </SideBarControls>
+            <SideBarControls>
+                <P>Made by <a href='https://github.com/timcoggins'>Tim Coggins</a></P>
+            </SideBarControls>
         </SideBarItem>
     );
 }

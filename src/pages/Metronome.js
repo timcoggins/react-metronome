@@ -4,10 +4,6 @@
  */
 
 // Imports
-// import { useEffect } from "react";
-// import { useContext } from "react";
-// import EngineContext from "../contexts/EngineContext";
-
 import MainWindow from "../components/atoms/MainWindow";
 import SideBar from "../components/atoms/SideBar";
 import NavBar from "../components/molecules/NavBar";
@@ -25,14 +21,6 @@ import Options from "../components/organisms/Options";
  * @constructor
  */
 const Metronome = () => {
-
-    // Import the context
-    //const { data, stepData } = useContext(EngineContext)
-
-    // Update the data in the engine
-    // eslint-disable-next-line
-    //useEffect(() => data = stepData, [stepData, data])
-
     // JSX
     return (
         <>

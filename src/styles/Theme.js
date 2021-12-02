@@ -49,12 +49,6 @@ const lightTheme = {
 
         borderColor: "#192428"
     }
-    // fonts: ["sans-serif", "Poppins"],
-    // fontSizes: {
-    //     small: "1em",
-    //     medium: "2em",
-    //     large: "3em"
-    // }
 };
 
 const darkTheme = {
@@ -94,12 +88,6 @@ const darkTheme = {
 
         borderColor: "#181818"
     }
-    // fonts: ["sans-serif", "Poppins"],
-    // fontSizes: {
-    //     small: "1em",
-    //     medium: "2em",
-    //     large: "3em"
-    // }
 };
 
 const Theme = ({ children }) => {

@@ -29,6 +29,8 @@ const SoundOptions = () => {
     // Consume the engine context
     const { updateSounds, muteDownbeat, muteUpbeat, muteRestart } = useContext(EngineContext)
 
+    // TODO Maybe if these are useREFS there wont be the rerender issues when the metronome is playing back
+
     // State variables for the dropdown selectors
     const [downbeatSound, setDownbeatSound] = useState('samples/BD CR78 MPC60 05.wav')
     const [upbeatSound, setUpbeatSound] = useState('samples/Clave CR78 MPC60 10.wav')

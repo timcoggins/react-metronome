@@ -39,20 +39,10 @@ const osc3 = new Tone.Player(soundReset).connect(vol);
  */
 export const EngineProvider = ({ children }) => {
 
-    // TODO Get the page to rerender to update the active step
-    // Using a useState causes strange side effects
-    // Problem 1: play stop button used to stop working
-    // Problem 2: changing any data in the stepData won't be heard until the player is started/stopped
-    //
-    // TODO See if the issue can be fixed by not making it a class, but into this component EnginerProvider
-    // Maybe having a useEffect set a useState to follow the current step of the engine
-    // I don't think this will work as a hook, but its an idea
-    //
-    // TODO Sounds arent updating anymore when playing, weirdly resets back to the default
-    // Changing the data also isn't working when playing back
     // TODO Add checks to see if the samples are loaded before playing
     // TODO Make sure if the user deletes a step, we dont try to play that step
     // TODO Stop the metronome is we load a new pattern
+    // TODO Implement volume controls
 
     // Declare state variables
     const [ stepData, setStepData ] = useState(patternList[0].data);
@@ -131,7 +121,6 @@ export const EngineProvider = ({ children }) => {
         setIsPlaying(false)
     }
 
-
     /**
      * Updates the sound
      * @param primary
@@ -171,7 +160,6 @@ export const EngineProvider = ({ children }) => {
 
     }
 
-
     /**
      * Mutes the sounds
      * @param muted
@@ -183,15 +171,12 @@ export const EngineProvider = ({ children }) => {
          osc3.mute = muted;
     }
 
-
     // JSX
     return (
         <Engine.Provider value={{
             data,
-            currentStep,
             activeStep,
             isPlaying,
-            setIsPlaying,
             stepData,
             setStepData,
             start,

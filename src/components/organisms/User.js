@@ -40,9 +40,10 @@ const User = () => {
     }, { onSuccess: (data) => {
             // Store the users JWT
             setUserData({
-            jwt: data.data.jwt,
-            id: data.data.user.id,
-            name: data.data.user.username})
+                jwt: data.data.jwt,
+                id: data.data.user.id,
+                name: data.data.user.username
+            })
         } })
 
 
